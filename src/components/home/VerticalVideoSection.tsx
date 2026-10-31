@@ -34,11 +34,13 @@ export interface ReelVideo {
 interface VerticalVideoSectionProps {
   onSelectStore?: (storeId: string) => void;
   onNavigate?: (tab: ActiveTab, params?: any) => void;
+  isDarkTheme?: boolean;
 }
 
 export const VerticalVideoSection: React.FC<VerticalVideoSectionProps> = ({ 
   onSelectStore, 
-  onNavigate 
+  onNavigate,
+  isDarkTheme = true
 }) => {
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
   const [playingVideoId, setPlayingVideoId] = useState<string | null>(null);
@@ -171,18 +173,26 @@ export const VerticalVideoSection: React.FC<VerticalVideoSectionProps> = ({
   };
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6" aria-label="Vídeos em Formato 9x16">
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-6" aria-label="Vídeos em Formato 9x16">
       {/* Header da Seção */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 gap-4">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E9F6EC] border border-[#07843B]/20 text-[#07552F] text-xs font-semibold mb-2">
-            <Sparkles className="w-3.5 h-3.5 text-[#07843B]" />
-            <span>Vídeos & Reels em 9:16</span>
+          <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold mb-2 ${
+            isDarkTheme 
+              ? 'bg-[#F4E500] text-[#17251D] shadow-sm' 
+              : 'bg-[#E9F6EC] border border-[#07843B]/20 text-[#07552F]'
+          }`}>
+            <Sparkles className={`w-3.5 h-3.5 ${isDarkTheme ? 'text-[#07552F]' : 'text-[#07843B]'}`} />
+            <span>VÍDEOS & REELS EM 9:16</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-[#17251D] tracking-tight">
+          <h2 className={`text-2xl sm:text-3xl font-bold tracking-tight ${
+            isDarkTheme ? 'text-white' : 'text-[#17251D]'
+          }`}>
             Comércio em Ação em Mairiporã
           </h2>
-          <p className="text-xs sm:text-sm text-[#68746C] mt-1 font-normal">
+          <p className={`text-xs sm:text-sm mt-1 font-normal ${
+            isDarkTheme ? 'text-[#E9F6EC]/90' : 'text-[#68746C]'
+          }`}>
             Assista a vídeos rápidos gravados pelas lojas locais, conheça produtos e fale diretamente no WhatsApp.
           </p>
         </div>
@@ -191,18 +201,22 @@ export const VerticalVideoSection: React.FC<VerticalVideoSectionProps> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={handleToggleMute}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white border border-[#E5EBE6] text-xs font-medium text-[#17251D] hover:bg-[#E9F6EC] hover:text-[#07843B] transition-colors shadow-xs cursor-pointer"
+            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-medium transition-all shadow-xs cursor-pointer ${
+              isDarkTheme
+                ? 'bg-white/10 hover:bg-white/20 text-white border border-white/20'
+                : 'bg-white border border-[#E5EBE6] text-[#17251D] hover:bg-[#E9F6EC] hover:text-[#07843B]'
+            }`}
             title={isMuted ? "Ativar som dos vídeos" : "Silenciar áudio"}
           >
             {isMuted ? (
               <>
-                <VolumeX className="w-4 h-4 text-[#68746C]" />
+                <VolumeX className="w-4 h-4 text-[#F4E500]" />
                 <span className="hidden sm:inline">Sem Som</span>
               </>
             ) : (
               <>
-                <Volume2 className="w-4 h-4 text-[#07843B]" />
-                <span className="hidden sm:inline text-[#07843B] font-semibold">Com Som</span>
+                <Volume2 className="w-4 h-4 text-[#35B956]" />
+                <span className="hidden sm:inline font-semibold text-[#35B956]">Com Som</span>
               </>
             )}
           </button>
@@ -210,14 +224,22 @@ export const VerticalVideoSection: React.FC<VerticalVideoSectionProps> = ({
           <div className="flex items-center gap-1">
             <button
               onClick={scrollLeft}
-              className="w-9 h-9 rounded-xl bg-white border border-[#E5EBE6] flex items-center justify-center text-[#17251D] hover:text-[#07843B] hover:bg-[#E9F6EC] transition-colors shadow-xs cursor-pointer"
+              className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all shadow-xs cursor-pointer ${
+                isDarkTheme
+                  ? 'bg-white/10 hover:bg-white/20 text-white border border-white/20'
+                  : 'bg-white border border-[#E5EBE6] text-[#17251D] hover:text-[#07843B] hover:bg-[#E9F6EC]'
+              }`}
               aria-label="Vídeos anteriores"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={scrollRight}
-              className="w-9 h-9 rounded-xl bg-white border border-[#E5EBE6] flex items-center justify-center text-[#17251D] hover:text-[#07843B] hover:bg-[#E9F6EC] transition-colors shadow-xs cursor-pointer"
+              className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all shadow-xs cursor-pointer ${
+                isDarkTheme
+                  ? 'bg-white/10 hover:bg-white/20 text-white border border-white/20'
+                  : 'bg-white border border-[#E5EBE6] text-[#17251D] hover:text-[#07843B] hover:bg-[#E9F6EC]'
+              }`}
               aria-label="Próximos vídeos"
             >
               <ChevronRight className="w-5 h-5" />

@@ -10,16 +10,16 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenRegisterModal }) => {
   return (
-    <footer className="bg-[#07552F] text-white border-t border-[#07843B]">
+    <footer className="bg-[#00553A] text-white border-t border-[#00A86B]">
       {/* Top Banner / Slogan Section */}
-      <div className="border-b border-[#07843B]/40 py-10 px-4 sm:px-6 lg:px-8">
+      <div className="border-b border-[#00A86B]/40 py-10 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
             <Logo variant="white" size="lg" showSubtitle={true} />
-            <p className="mt-3 text-lg font-medium text-[#E9F6EC] italic">
+            <p className="mt-3 text-lg font-medium text-[#EBF8F2] italic">
               &ldquo;Juntos, o comércio local fica mais forte.&rdquo;
             </p>
-            <p className="text-xs text-[#35B956] mt-1 font-medium">
+            <p className="text-xs text-[#66CDAA] mt-1 font-medium">
               Compre em Mairiporã. O comércio local mais perto de você.
             </p>
           </div>
@@ -27,7 +27,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenRegisterModal 
           <div className="flex flex-wrap justify-center gap-3">
             <button
               onClick={onOpenRegisterModal ? onOpenRegisterModal : () => onNavigate('register-business')}
-              className="px-5 py-2.5 bg-[#F4E500] hover:bg-[#e0d200] text-[#17251D] font-bold text-sm rounded-lg shadow-xs transition-transform active:scale-95 cursor-pointer"
+              className="px-5 py-2.5 bg-[#FFD700] hover:bg-[#e6c200] text-[#12221A] font-bold text-sm rounded-lg shadow-xs transition-transform active:scale-95 cursor-pointer"
             >
               Cadastre sua empresa
             </button>
@@ -47,18 +47,18 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenRegisterModal 
           
           {/* Col 1: About the Platform */}
           <div className="space-y-4">
-            <h4 className="text-sm font-bold tracking-wider uppercase text-[#F4E500]">
+            <h4 className="text-sm font-bold tracking-wider uppercase text-[#FFD700]">
               Sobre a Plataforma
             </h4>
-            <p className="text-xs text-[#E9F6EC]/90 leading-relaxed">
+            <p className="text-xs text-[#EBF8F2]/90 leading-relaxed">
               O <strong>Conecta Mairiporã</strong> é a ponte digital entre os cidadãos e as lojas, profissionais e prestadores de serviços da cidade de Mairiporã - SP.
             </p>
-            <div className="flex items-center gap-2 text-xs text-[#E9F6EC]">
-              <MapPin className="w-4 h-4 text-[#F4E500] shrink-0" />
+            <div className="flex items-center gap-2 text-xs text-[#EBF8F2]">
+              <MapPin className="w-4 h-4 text-[#FFD700] shrink-0" />
               <span>Mairiporã, Serra da Cantareira - SP</span>
             </div>
-            <div className="flex items-center gap-2 text-xs text-[#E9F6EC]">
-              <Mail className="w-4 h-4 text-[#F4E500] shrink-0" />
+            <div className="flex items-center gap-2 text-xs text-[#EBF8F2]">
+              <Mail className="w-4 h-4 text-[#FFD700] shrink-0" />
               <span>contato@conectamairipora.com.br</span>
             </div>
           </div>

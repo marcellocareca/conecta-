@@ -2,18 +2,26 @@
 
 @layer base {
   :root {
-    /* Paleta Oficial Conecta Mairiporã */
-    --color-verde-principal: #07843B;
-    --color-verde-escuro: #07552F;
-    --color-verde-claro: #E9F6EC;
-    --color-verde-destaque: #35B956;
-    --color-azul-logo: #0879D9;
-    --color-amarelo-logo: #F4E500;
+    /* Paleta Oficial do Projeto Conecta Mairiporã (Jade Ascent, Sapphire, Gold) */
+    --color-jade-ascent: #00A86B;
+    --color-sapphire: #0F52BA;
+    --color-gold: #FFD700;
+    --color-jade-light: #66CDAA;
+    --color-jade-dark: #00553A;
+    --color-jade-tint: #EBF8F2;
+
+    /* Mapeamento de Cores da Aplicação */
+    --color-verde-principal: #00A86B;
+    --color-verde-escuro: #00553A;
+    --color-verde-claro: #EBF8F2;
+    --color-verde-destaque: #66CDAA;
+    --color-azul-logo: #0F52BA;
+    --color-amarelo-logo: #FFD700;
     --color-branco: #FFFFFF;
-    --color-fundo-geral: #F7F9F7;
-    --color-texto-principal: #17251D;
-    --color-texto-secundario: #68746C;
-    --color-bordas: #E5EBE6;
+    --color-fundo-geral: #F6FAF7;
+    --color-texto-principal: #12221A;
+    --color-texto-secundario: #586B60;
+    --color-bordas: #E2ECE5;
   }
 
   body {
@@ -32,44 +40,44 @@
 
 /* Utilitários Padronizados */
 .btn-primary {
-  background-color: #07843B;
+  background-color: #00A86B;
   color: #FFFFFF;
   font-family: 'Inter', sans-serif;
   font-weight: 600;
   transition: all 0.15s ease-in-out;
 }
 .btn-primary:hover {
-  background-color: #07552F;
+  background-color: #00553A;
 }
 
 .btn-secondary {
   background-color: #FFFFFF;
-  color: #07843B;
-  border: 1px solid #07843B;
+  color: #00A86B;
+  border: 1px solid #00A86B;
   font-family: 'Inter', sans-serif;
   font-weight: 600;
   transition: all 0.15s ease-in-out;
 }
 .btn-secondary:hover {
-  background-color: #E9F6EC;
+  background-color: #EBF8F2;
 }
 
 /* Card Padrão Mercado / Apple Clean */
 .card-clean {
   background-color: #FFFFFF;
-  border: 1px solid #E5EBE6;
+  border: 1px solid #E2ECE5;
   border-radius: 1rem;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03);
   transition: all 0.2s ease-in-out;
 }
 .card-clean:hover {
-  border-color: #07843B;
-  box-shadow: 0 4px 12px 0 rgba(7, 132, 59, 0.08);
+  border-color: #00A86B;
+  box-shadow: 0 4px 12px 0 rgba(0, 168, 107, 0.1);
 }
 
 /* Focus Rings com o verde oficial */
 :focus-visible {
-  outline: 2px solid #07843B;
+  outline: 2px solid #00A86B;
   outline-offset: 2px;
 }
 

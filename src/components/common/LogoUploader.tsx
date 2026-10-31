@@ -111,11 +111,11 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
     <div className={`space-y-2 ${className}`}>
       {/* Label & Max Size Pill */}
       <div className="flex items-center justify-between gap-2">
-        <label className="text-xs font-bold text-[#17251D] flex items-center gap-1.5">
+        <label className="text-xs font-bold text-[#12221A] flex items-center gap-1.5">
           <span>{label}</span>
           {required && <span className="text-red-500">*</span>}
         </label>
-        <div className="flex items-center gap-1 text-[11px] font-semibold text-[#07552F] bg-[#E9F6EC] px-2.5 py-0.5 rounded-full border border-[#07843B]/20">
+        <div className="flex items-center gap-1 text-[11px] font-semibold text-[#00553A] bg-[#EBF8F2] px-2.5 py-0.5 rounded-full border border-[#00A86B]/20">
           <span>Máx: {maxSizeMB} MB</span>
         </div>
       </div>
@@ -132,9 +132,9 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
       {/* Upload & Preview Area */}
       {hasLogo ? (
         /* Preview Card with Image & Action */
-        <div className="p-3 bg-white border border-[#07843B]/30 rounded-xl shadow-xs flex items-center justify-between gap-3 animate-in fade-in">
+        <div className="p-3 bg-white border border-[#00A86B]/30 rounded-xl shadow-xs flex items-center justify-between gap-3 animate-in fade-in">
           <div className="flex items-center gap-3 min-w-0">
-            <div className="w-14 h-14 rounded-lg border border-[#E5EBE6] bg-[#F7F9F7] p-1 flex items-center justify-center shrink-0 overflow-hidden shadow-xs">
+            <div className="w-14 h-14 rounded-lg border border-[#E2ECE5] bg-[#F6FAF7] p-1 flex items-center justify-center shrink-0 overflow-hidden shadow-xs">
               <img
                 src={value}
                 alt="Logo pré-visualização"
@@ -145,18 +145,18 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
               />
             </div>
             <div className="min-w-0">
-              <div className="flex items-center gap-1.5 text-xs font-bold text-[#07552F]">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#07843B] shrink-0" />
+              <div className="flex items-center gap-1.5 text-xs font-bold text-[#00553A]">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#00A86B] shrink-0" />
                 <span className="truncate">Logo carregado com sucesso</span>
               </div>
-              <p className="text-[11px] text-[#68746C] truncate mt-0.5">
+              <p className="text-[11px] text-[#586B60] truncate mt-0.5">
                 {fileDetails ? `${fileDetails.name} (${fileDetails.sizeKB} KB)` : 'Imagem vinculada'}
               </p>
               <div className="flex items-center gap-2 mt-1">
                 <button
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
-                  className="text-[11px] font-semibold text-[#07843B] hover:text-[#07552F] hover:underline flex items-center gap-1 cursor-pointer"
+                  className="text-[11px] font-semibold text-[#00A86B] hover:text-[#00553A] hover:underline flex items-center gap-1 cursor-pointer"
                 >
                   <RefreshCw className="w-3 h-3" />
                   <span>Trocar logo</span>
@@ -168,7 +168,7 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
           <button
             type="button"
             onClick={handleRemove}
-            className="w-8 h-8 rounded-full bg-[#F7F9F7] hover:bg-red-50 text-[#68746C] hover:text-red-600 flex items-center justify-center transition-colors cursor-pointer shrink-0 border border-[#E5EBE6]"
+            className="w-8 h-8 rounded-full bg-[#F6FAF7] hover:bg-red-50 text-[#586B60] hover:text-red-600 flex items-center justify-center transition-colors cursor-pointer shrink-0 border border-[#E2ECE5]"
             title="Remover logotipo"
             aria-label="Remover logotipo"
           >
@@ -177,13 +177,13 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
         </div>
       ) : showUrlInput ? (
         /* Alternative: External URL link input */
-        <div className="p-3 bg-[#F7F9F7] border border-[#E5EBE6] rounded-xl space-y-2">
+        <div className="p-3 bg-[#F6FAF7] border border-[#E2ECE5] rounded-xl space-y-2">
           <div className="flex items-center justify-between text-xs">
-            <span className="font-semibold text-[#17251D]">Link direto da imagem (URL)</span>
+            <span className="font-semibold text-[#12221A]">Link direto da imagem (URL)</span>
             <button
               type="button"
               onClick={() => setShowUrlInput(false)}
-              className="text-[#07843B] hover:underline text-[11px] font-semibold cursor-pointer"
+              className="text-[#00A86B] hover:underline text-[11px] font-semibold cursor-pointer"
             >
               Voltar para upload de arquivo
             </button>
@@ -194,12 +194,12 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
               value={customUrl}
               onChange={(e) => setCustomUrl(e.target.value)}
               placeholder="https://exemplo.com/logo.png"
-              className="flex-1 px-3 py-2 text-xs bg-white border border-[#E5EBE6] rounded-lg focus:border-[#07843B] outline-none text-[#17251D]"
+              className="flex-1 px-3 py-2 text-xs bg-white border border-[#E2ECE5] rounded-lg focus:border-[#00A86B] outline-none text-[#12221A]"
             />
             <button
               type="button"
               onClick={handleUrlSubmit}
-              className="px-3 py-2 bg-[#07843B] hover:bg-[#07552F] text-white text-xs font-bold rounded-lg transition-colors cursor-pointer"
+              className="px-3 py-2 bg-[#00A86B] hover:bg-[#00553A] text-white text-xs font-bold rounded-lg transition-colors cursor-pointer"
             >
               Usar Link
             </button>
@@ -214,29 +214,29 @@ export const LogoUploader: React.FC<LogoUploaderProps> = ({
           onClick={() => fileInputRef.current?.click()}
           className={`border-2 border-dashed rounded-xl p-4 sm:p-5 text-center cursor-pointer transition-all ${
             isDragging
-              ? 'border-[#07843B] bg-[#E9F6EC]'
-              : 'border-[#E5EBE6] hover:border-[#07843B] bg-[#F7F9F7] hover:bg-[#E9F6EC]/40'
+              ? 'border-[#00A86B] bg-[#EBF8F2]'
+              : 'border-[#E2ECE5] hover:border-[#00A86B] bg-[#F6FAF7] hover:bg-[#EBF8F2]/50'
           }`}
         >
-          <div className="w-10 h-10 rounded-full bg-[#E9F6EC] text-[#07843B] flex items-center justify-center mx-auto mb-2 shadow-xs">
+          <div className="w-10 h-10 rounded-full bg-[#EBF8F2] text-[#00A86B] flex items-center justify-center mx-auto mb-2 shadow-xs">
             <Upload className="w-5 h-5" />
           </div>
 
-          <p className="text-xs sm:text-sm font-bold text-[#17251D]">
+          <p className="text-xs sm:text-sm font-bold text-[#12221A]">
             Clique para enviar o logo ou arraste aqui
           </p>
-          <p className="text-[11px] text-[#68746C] mt-1">
+          <p className="text-[11px] text-[#586B60] mt-1">
             Formatos aceitos: <strong>PNG, JPG, WEBP, SVG</strong> • Tamanho máximo: <strong>{maxSizeMB} MB</strong>
           </p>
 
-          <div className="mt-2.5 pt-2 border-t border-[#E5EBE6]/60 flex items-center justify-center">
+          <div className="mt-2.5 pt-2 border-t border-[#E2ECE5]/60 flex items-center justify-center">
             <button
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
                 setShowUrlInput(true);
               }}
-              className="text-[11px] font-semibold text-[#07843B] hover:text-[#07552F] hover:underline flex items-center gap-1 cursor-pointer"
+              className="text-[11px] font-semibold text-[#00A86B] hover:text-[#00553A] hover:underline flex items-center gap-1 cursor-pointer"
             >
               <LinkIcon className="w-3 h-3" />
               <span>Ou prefere inserir o link de uma imagem?</span>

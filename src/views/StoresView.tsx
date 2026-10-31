@@ -88,7 +88,7 @@ export const StoresView: React.FC<StoresViewProps> = ({
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       {/* Title & Introduction */}
       <div className="border-b border-[#E5EBE6] pb-6">
-        <span className="text-xs font-semibold uppercase tracking-wider text-[#07843B]">
+        <span className="text-xs font-semibold uppercase tracking-wider text-[#00A86B]">
           Guia do Comércio Local
         </span>
         <h1 className="text-3xl font-bold text-[#17251D] mt-1">
@@ -111,13 +111,13 @@ export const StoresView: React.FC<StoresViewProps> = ({
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
               placeholder="Buscar por nome, produto, serviço..."
-              className="w-full pl-10 pr-16 py-2.5 bg-[#F7F9F7] border border-[#E5EBE6] rounded-xl text-sm text-[#17251D] placeholder-[#68746C] focus:bg-white focus:border-[#07843B] transition-colors"
+              className="w-full pl-10 pr-16 py-2.5 bg-[#F7F9F7] border border-[#E5EBE6] rounded-xl text-sm text-[#12221A] placeholder-[#586B60] focus:bg-white focus:border-[#00A86B] focus:ring-1 focus:ring-[#00A86B] transition-colors"
             />
             <div className="absolute right-2 flex items-center gap-1">
               {searchTerm && (
                 <button
                   onClick={() => setSearchTerm('')}
-                  className="p-1 text-[#68746C] hover:text-[#17251D] cursor-pointer"
+                  className="p-1 text-[#586B60] hover:text-[#12221A] cursor-pointer"
                   title="Limpar busca"
                 >
                   <X className="w-4 h-4" />
@@ -133,11 +133,11 @@ export const StoresView: React.FC<StoresViewProps> = ({
 
           {/* Category Filter */}
           <div className="relative">
-            <Filter className="w-4 h-4 text-[#68746C] absolute left-3.5 top-3.5" />
+            <Filter className="w-4 h-4 text-[#586B60] absolute left-3.5 top-3.5" />
             <select
               value={selectedCategory}
               onChange={e => setSelectedCategory(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 bg-[#F7F9F7] border border-[#E5EBE6] rounded-xl text-sm focus:bg-white focus:border-[#07843B] transition-colors text-[#17251D] cursor-pointer"
+              className="w-full pl-10 pr-4 py-2.5 bg-[#F7F9F7] border border-[#E5EBE6] rounded-xl text-sm focus:bg-white focus:border-[#00A86B] transition-colors text-[#12221A] cursor-pointer"
             >
               <option value="all">Todas as categorias</option>
               {categories.map(cat => (
@@ -150,11 +150,11 @@ export const StoresView: React.FC<StoresViewProps> = ({
 
           {/* Neighborhood Filter */}
           <div className="relative">
-            <MapPin className="w-4 h-4 text-[#68746C] absolute left-3.5 top-3.5" />
+            <MapPin className="w-4 h-4 text-[#586B60] absolute left-3.5 top-3.5" />
             <select
               value={selectedNeighborhood}
               onChange={e => setSelectedNeighborhood(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 bg-[#F7F9F7] border border-[#E5EBE6] rounded-xl text-sm focus:bg-white focus:border-[#07843B] transition-colors text-[#17251D] cursor-pointer"
+              className="w-full pl-10 pr-4 py-2.5 bg-[#F7F9F7] border border-[#E5EBE6] rounded-xl text-sm focus:bg-white focus:border-[#00A86B] transition-colors text-[#12221A] cursor-pointer"
             >
               <option value="all">Todos os bairros de Mairiporã</option>
               {MAIRIPORA_NEIGHBORHOODS.map(nh => (
@@ -167,14 +167,14 @@ export const StoresView: React.FC<StoresViewProps> = ({
         </div>
 
         {/* Results summary and reset */}
-        <div className="flex items-center justify-between pt-2 border-t border-[#E5EBE6] text-xs text-[#68746C]">
+        <div className="flex items-center justify-between pt-2 border-t border-[#E5EBE6] text-xs text-[#586B60]">
           <span>
-            Exibindo <strong className="text-[#17251D]">{filteredStores.length}</strong> {filteredStores.length === 1 ? 'estabelecimento' : 'estabelecimentos'}
+            Exibindo <strong className="text-[#12221A]">{filteredStores.length}</strong> {filteredStores.length === 1 ? 'estabelecimento' : 'estabelecimentos'}
           </span>
           {hasActiveFilters && (
             <button
               onClick={handleResetFilters}
-              className="text-[#07843B] hover:text-[#07552F] font-semibold flex items-center gap-1 cursor-pointer"
+              className="text-[#00A86B] hover:text-[#00553A] font-semibold flex items-center gap-1 cursor-pointer"
             >
               <X className="w-3.5 h-3.5" />
               Limpar filtros
@@ -186,16 +186,16 @@ export const StoresView: React.FC<StoresViewProps> = ({
       {/* Stores List */}
       {filteredStores.length === 0 ? (
         <div className="text-center py-16 bg-white rounded-2xl border border-[#E5EBE6] p-8 shadow-xs">
-          <div className="w-16 h-16 bg-[#E9F6EC] text-[#07843B] rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <div className="w-16 h-16 bg-[#EBF8F2] text-[#00A86B] rounded-2xl flex items-center justify-center mx-auto mb-4">
             <Store className="w-8 h-8" />
           </div>
-          <h3 className="text-lg font-bold text-[#17251D]">Nenhum estabelecimento encontrado</h3>
-          <p className="text-xs text-[#68746C] mt-1 max-w-md mx-auto font-normal">
+          <h3 className="text-lg font-bold text-[#12221A]">Nenhum estabelecimento encontrado</h3>
+          <p className="text-xs text-[#586B60] mt-1 max-w-md mx-auto font-normal">
             Não encontramos lojas que correspondam aos filtros selecionados. Tente buscar com outros termos ou limpar os filtros.
           </p>
           <button
             onClick={handleResetFilters}
-            className="mt-4 px-5 py-2.5 bg-[#07843B] hover:bg-[#07552F] text-white text-xs font-semibold rounded-xl shadow-xs transition-colors cursor-pointer"
+            className="mt-4 px-5 py-2.5 bg-[#00A86B] hover:bg-[#00553A] text-white text-xs font-semibold rounded-xl shadow-xs transition-colors cursor-pointer"
           >
             Ver todas as lojas
           </button>

@@ -104,7 +104,7 @@ export const Header: React.FC<HeaderProps> = ({
             <Logo size="md" />
           </div>
 
-          {/* Desktop Navigation Links (Inter Medium, links em verde escuro #07552F) */}
+          {/* Desktop Navigation Links (Inter Medium, links em verde escuro #00553A) */}
           <nav className="hidden lg:flex items-center space-x-5 xl:space-x-7">
             {navItems.map(item => {
               const isActive = currentTab === item.id;
@@ -114,13 +114,13 @@ export const Header: React.FC<HeaderProps> = ({
                   onClick={() => handleNavClick(item.id)}
                   className={`relative py-2 text-sm font-medium transition-colors duration-150 cursor-pointer ${
                     isActive 
-                      ? 'text-[#07843B] font-semibold' 
-                      : 'text-[#07552F] hover:text-[#07843B]'
+                      ? 'text-[#00A86B] font-semibold' 
+                      : 'text-[#00553A] hover:text-[#00A86B]'
                   }`}
                 >
                   {item.label}
                   {isActive && (
-                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#07843B] rounded-full" />
+                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#00A86B] rounded-full" />
                   )}
                 </button>
               );
@@ -130,13 +130,13 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Unified Desktop Search Bar with Voice Search Button */}
           <div className="hidden md:flex flex-1 max-w-xs lg:max-w-sm mx-2 lg:mx-3">
             <form onSubmit={handleSearchSubmit} className="relative w-full flex items-center">
-              <Search className="w-4 h-4 text-[#68746C] absolute left-3 pointer-events-none" />
+              <Search className="w-4 h-4 text-[#586B60] absolute left-3 pointer-events-none" />
               <input
                 type="text"
                 value={headerSearchTerm}
                 onChange={e => setHeaderSearchTerm(e.target.value)}
                 placeholder="Buscar lojas, serviços ou falar..."
-                className="w-full pl-9 pr-9 py-2 text-xs bg-[#F7F9F7] border border-[#E5EBE6] rounded-full focus:bg-white focus:border-[#07843B] text-[#17251D] placeholder-[#68746C] transition-colors"
+                className="w-full pl-9 pr-9 py-2 text-xs bg-[#F6FAF7] border border-[#E2ECE5] rounded-full focus:bg-white focus:border-[#00A86B] text-[#12221A] placeholder-[#586B60] transition-colors"
               />
               <div className="absolute right-1.5 flex items-center">
                 <VoiceSearchButton
@@ -161,10 +161,10 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Merchant CTA button: Enlarged size with large + symbol, triggers 'Cadastre aqui seu comércio' popup */}
             <button
               onClick={onOpenRegisterModal ? onOpenRegisterModal : () => handleNavClick('register-business')}
-              className="hidden lg:inline-flex items-center gap-2.5 px-4.5 py-2.5 rounded-full text-sm font-bold text-white bg-[#07843B] hover:bg-[#07552F] shadow-sm hover:shadow-md transition-all duration-200 active:scale-95 group cursor-pointer border border-[#07843B]"
+              className="hidden lg:inline-flex items-center gap-2.5 px-4.5 py-2.5 rounded-full text-sm font-bold text-white bg-[#00A86B] hover:bg-[#00553A] shadow-sm hover:shadow-md transition-all duration-200 active:scale-95 group cursor-pointer border border-[#00A86B]"
               title="Cadastre aqui seu comércio - 100% Gratuito"
             >
-              <div className="w-6 h-6 rounded-full bg-[#F4E500] text-[#17251D] flex items-center justify-center font-black text-xl leading-none shrink-0 group-hover:scale-110 group-hover:rotate-90 transition-transform shadow-xs">
+              <div className="w-6 h-6 rounded-full bg-[#FFD700] text-[#12221A] flex items-center justify-center font-black text-xl leading-none shrink-0 group-hover:scale-110 group-hover:rotate-90 transition-transform shadow-xs">
                 +
               </div>
               <span className="tracking-tight whitespace-nowrap">Cadastrar Loja</span>
@@ -173,22 +173,22 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Quick mobile button for Cadastrar Loja with prominent + */}
             <button
               onClick={onOpenRegisterModal ? onOpenRegisterModal : () => handleNavClick('register-business')}
-              className="lg:hidden flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full bg-[#E9F6EC] hover:bg-[#07843B] text-[#07843B] hover:text-white border border-[#07843B]/30 font-bold text-xs transition-all active:scale-95 cursor-pointer"
+              className="lg:hidden flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full bg-[#EBF8F2] hover:bg-[#00A86B] text-[#00A86B] hover:text-white border border-[#00A86B]/30 font-bold text-xs transition-all active:scale-95 cursor-pointer"
               title="Cadastre seu comércio em Mairiporã"
             >
-              <div className="w-5 h-5 rounded-full bg-[#07843B] text-[#F4E500] flex items-center justify-center font-black text-base shrink-0 leading-none">
+              <div className="w-5 h-5 rounded-full bg-[#00A86B] text-[#FFD700] flex items-center justify-center font-black text-base shrink-0 leading-none">
                 +
               </div>
               <span className="hidden xs:inline font-bold">Cadastrar</span>
             </button>
 
-            {/* Entrar Button (Botões verdes: #07843B hover #07552F) */}
+            {/* Entrar Button */}
             <button
               onClick={isAdminLoggedIn ? () => handleNavClick('admin') : onOpenLoginModal}
               className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-xs cursor-pointer ${
                 isAdminLoggedIn
-                  ? 'bg-[#07552F] text-white hover:bg-[#07843B]'
-                  : 'bg-[#07843B] hover:bg-[#07552F] text-white'
+                  ? 'bg-[#00553A] text-white hover:bg-[#00A86B]'
+                  : 'bg-[#00A86B] hover:bg-[#00553A] text-white'
               }`}
             >
               <User className="w-4 h-4 text-white" />
@@ -196,26 +196,26 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="sm:hidden">{isAdminLoggedIn ? 'Admin' : 'Entrar'}</span>
             </button>
 
-            {/* Cart / Sacola Button with Logo Yellow and Blue Accent */}
+            {/* Cart / Sacola Button with Sapphire and Gold Accent */}
             <button
               onClick={onOpenSavedBag}
-              className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-[#E5EBE6] bg-white hover:bg-[#E9F6EC] flex items-center justify-center transition-colors shadow-xs cursor-pointer"
+              className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-[#E2ECE5] bg-white hover:bg-[#EBF8F2] flex items-center justify-center transition-colors shadow-xs cursor-pointer"
               title="Sacola / Lojas e Itens Salvos"
               aria-label="Minha Sacola"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M3 3H5L6.68 14.39C6.77 15.01 7.31 15.48 7.94 15.48H18.5C19.11 15.48 19.64 15.03 19.74 14.42L21 6.5H6"
-                  stroke="#0879D9"
+                  stroke="#0F52BA"
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
-                <circle cx="9" cy="20" r="1.5" fill="#F4E500" />
-                <circle cx="18" cy="20" r="1.5" fill="#F4E500" />
+                <circle cx="9" cy="20" r="1.5" fill="#FFD700" />
+                <circle cx="18" cy="20" r="1.5" fill="#FFD700" />
               </svg>
 
-              <span className="absolute -top-1.5 -right-1.5 flex items-center justify-center min-w-5 h-5 px-1 text-[11px] font-bold text-white bg-[#07843B] rounded-full shadow-xs">
+              <span className="absolute -top-1.5 -right-1.5 flex items-center justify-center min-w-5 h-5 px-1 text-[11px] font-bold text-white bg-[#00A86B] rounded-full shadow-xs">
                 {savedItemsCount}
               </span>
             </button>
@@ -269,7 +269,7 @@ export const Header: React.FC<HeaderProps> = ({
               );
             })}
 
-            <div className="pt-3 border-t border-[#E5EBE6] space-y-2 mt-2">
+            <div className="pt-3 border-t border-[#E2ECE5] space-y-2 mt-2">
               {/* Cadastrar Loja CTA with large + symbol */}
               <button
                 onClick={() => {
@@ -280,9 +280,9 @@ export const Header: React.FC<HeaderProps> = ({
                     handleNavClick('register-business');
                   }
                 }}
-                className="flex items-center justify-center gap-3 w-full py-3.5 px-4 rounded-xl bg-[#07843B] hover:bg-[#07552F] text-white font-bold text-sm shadow-md transition-all cursor-pointer group"
+                className="flex items-center justify-center gap-3 w-full py-3.5 px-4 rounded-xl bg-[#00A86B] hover:bg-[#00553A] text-white font-bold text-sm shadow-md transition-all cursor-pointer group"
               >
-                <div className="w-7 h-7 rounded-full bg-[#F4E500] text-[#17251D] flex items-center justify-center font-black text-xl leading-none shadow-xs group-hover:rotate-90 transition-transform shrink-0">
+                <div className="w-7 h-7 rounded-full bg-[#FFD700] text-[#12221A] flex items-center justify-center font-black text-xl leading-none shadow-xs group-hover:rotate-90 transition-transform shrink-0">
                   +
                 </div>
                 <span>Cadastre Aqui Seu Comércio Grátis</span>
@@ -297,9 +297,9 @@ export const Header: React.FC<HeaderProps> = ({
                     onOpenLoginModal();
                   }
                 }}
-                className="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-[#07843B] hover:bg-[#07552F] text-white font-semibold text-sm"
+                className="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-[#00553A] hover:bg-[#00A86B] text-white font-semibold text-sm shadow-xs"
               >
-                <ShieldCheck className="w-4 h-4 text-[#F4E500]" />
+                <ShieldCheck className="w-4 h-4 text-[#FFD700]" />
                 {isAdminLoggedIn ? 'Painel Administrativo' : 'Entrar na Plataforma'}
               </button>
             </div>

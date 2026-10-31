@@ -148,10 +148,10 @@ export const RegisterBusinessModal: React.FC<RegisterBusinessModalProps> = ({
         aria-modal="true"
         aria-labelledby="modal-register-title"
       >
-        {/* Header with Conecta Mairiporã Brand Accents */}
-        <div className="relative bg-gradient-to-r from-[#07552F] via-[#07843B] to-[#07552F] text-white p-5 sm:p-6 shrink-0">
+        {/* Header with Conecta Mairiporã Brand Accents (Jade Ascent & Dark) */}
+        <div className="relative bg-gradient-to-r from-[#00553A] via-[#00A86B] to-[#00553A] text-white p-5 sm:p-6 shrink-0">
           {/* Decorative subtle pattern */}
-          <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#F4E500_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
+          <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#FFD700_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
 
           {/* Close button */}
           <button
@@ -163,18 +163,18 @@ export const RegisterBusinessModal: React.FC<RegisterBusinessModalProps> = ({
           </button>
 
           <div className="flex items-center gap-2 mb-2">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-[#F4E500] text-[#17251D] shadow-xs">
-              <Sparkles className="w-3.5 h-3.5 text-[#07552F]" />
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-[#FFD700] text-[#12221A] shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#00553A]" />
               100% GRATUITO
             </span>
-            <span className="text-xs font-semibold text-[#E9F6EC]">
+            <span className="text-xs font-semibold text-[#EBF8F2]">
               Mairiporã - SP
             </span>
           </div>
 
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center shrink-0 shadow-inner">
-              <div className="w-8 h-8 rounded-full bg-[#F4E500] flex items-center justify-center text-[#07552F] font-black text-2xl shadow-xs">
+              <div className="w-8 h-8 rounded-full bg-[#FFD700] flex items-center justify-center text-[#00553A] font-black text-2xl shadow-xs">
                 +
               </div>
             </div>
@@ -182,7 +182,7 @@ export const RegisterBusinessModal: React.FC<RegisterBusinessModalProps> = ({
               <h2 id="modal-register-title" className="text-xl sm:text-2xl font-black text-white leading-tight">
                 Cadastre Aqui Seu Comércio
               </h2>
-              <p className="text-xs sm:text-sm text-[#E9F6EC] mt-0.5 font-medium">
+              <p className="text-xs sm:text-sm text-[#EBF8F2] mt-0.5 font-medium">
                 Conecte seu negócio a milhares de clientes e moradores locais!
               </p>
             </div>
@@ -415,9 +415,9 @@ export const RegisterBusinessModal: React.FC<RegisterBusinessModalProps> = ({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full group flex items-center justify-center gap-3 py-3.5 px-6 rounded-2xl bg-[#07843B] hover:bg-[#07552F] text-white font-bold text-base shadow-lg shadow-[#07843B]/20 transition-all active:scale-[0.99] disabled:opacity-50 cursor-pointer"
+                  className="w-full group flex items-center justify-center gap-3 py-3.5 px-6 rounded-2xl bg-[#00A86B] hover:bg-[#00553A] text-white font-bold text-base shadow-lg shadow-[#00A86B]/20 transition-all active:scale-[0.99] disabled:opacity-50 cursor-pointer"
                 >
-                  <div className="w-8 h-8 rounded-full bg-[#F4E500] text-[#17251D] flex items-center justify-center font-black text-xl shadow-xs group-hover:scale-110 group-hover:rotate-90 transition-transform">
+                  <div className="w-8 h-8 rounded-full bg-[#FFD700] text-[#12221A] flex items-center justify-center font-black text-xl shadow-xs group-hover:scale-110 group-hover:rotate-90 transition-transform">
                     +
                   </div>
                   <span>{isSubmitting ? 'Cadastrando seu comércio...' : 'Cadastrar Meu Comércio Agora'}</span>

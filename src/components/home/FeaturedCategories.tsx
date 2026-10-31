@@ -323,26 +323,26 @@ export const FeaturedCategories: React.FC<FeaturedCategoriesProps> = ({
   };
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 -mt-2 sm:-mt-4">
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
       {/* Header Container */}
-      <div className="bg-white rounded-2xl sm:rounded-3xl border border-[#E5EBE6] p-5 sm:p-8 shadow-xs">
+      <div className="bg-white/95 backdrop-blur-xs rounded-2xl sm:rounded-3xl border border-[#D5EADB] p-5 sm:p-8 shadow-sm">
         
         {/* Top Header Row */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-[#E5EBE6]">
           <div className="space-y-1.5 max-w-2xl">
             {/* Tag / Eyebrow */}
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E9F6EC] text-[#07843B] text-[11px] sm:text-xs font-semibold tracking-wide">
-              <Sparkles className="w-3.5 h-3.5 text-[#07843B]" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EBF8F2] text-[#00553A] text-[11px] sm:text-xs font-bold tracking-wide border border-[#66CDAA]/40">
+              <Sparkles className="w-3.5 h-3.5 text-[#00A86B]" />
               <span>SETORIZAÇÃO COMERCIAL DE MAIRIPORÃ</span>
             </div>
             
             {/* Title: Inter ExtraBold */}
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#17251D] tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#12221A] tracking-tight">
               Categorias em Destaque
             </h2>
 
             {/* Subtitle: Inter Regular */}
-            <p className="text-xs sm:text-sm text-[#68746C] leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#586B60] leading-relaxed">
               Encontre com facilidade o comércio local de Mairiporã dividido por setores. Escolha uma categoria para visualizar lojas, contatos e ofertas.
             </p>
           </div>
@@ -351,7 +351,7 @@ export const FeaturedCategories: React.FC<FeaturedCategoriesProps> = ({
           <div className="flex items-center gap-3 shrink-0">
             <button
               onClick={() => onNavigate('categories')}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#E9F6EC] text-[#07843B] hover:bg-[#07843B] hover:text-white transition-all duration-200 text-xs sm:text-sm font-semibold border border-[#E5EBE6] hover:border-[#07843B] cursor-pointer group shadow-xs"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#EBF8F2] text-[#00553A] hover:bg-[#00A86B] hover:text-white transition-all duration-200 text-xs sm:text-sm font-bold border border-[#66CDAA]/40 hover:border-[#00A86B] cursor-pointer group shadow-xs"
               title="Acessar catálogo completo com todos os segmentos de Mairiporã"
             >
               <span>Ver todas as categorias</span>
@@ -371,8 +371,8 @@ export const FeaturedCategories: React.FC<FeaturedCategoriesProps> = ({
                   onClick={() => setSelectedGroup(filter.id)}
                   className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-150 cursor-pointer ${
                     isActive
-                      ? 'bg-[#07843B] text-white shadow-xs'
-                      : 'bg-[#F7F9F7] text-[#68746C] hover:text-[#07843B] hover:bg-[#E9F6EC] border border-[#E5EBE6]'
+                      ? 'bg-[#00A86B] text-white shadow-xs'
+                      : 'bg-[#F7F9F7] text-[#586B60] hover:text-[#00553A] hover:bg-[#EBF8F2] border border-[#E5EBE6]'
                   }`}
                 >
                   {filter.label}
@@ -400,41 +400,41 @@ export const FeaturedCategories: React.FC<FeaturedCategoriesProps> = ({
                     handleCategoryClick(cat.id);
                   }
                 }}
-                className="group relative flex flex-col justify-between p-4 sm:p-5 rounded-2xl bg-white border border-[#E5EBE6] hover:border-[#07843B] hover:shadow-md transition-all duration-200 cursor-pointer text-left hover:-translate-y-1"
+                className="group relative flex flex-col justify-between p-4 sm:p-5 rounded-2xl bg-white border border-[#E5EBE6] hover:border-[#00A86B] hover:shadow-md transition-all duration-200 cursor-pointer text-left hover:-translate-y-1"
                 aria-label={`Ver comércios de ${cat.name}`}
               >
                 {/* Top Row: Custom Icon + Count Badge */}
                 <div>
                   <div className="flex items-start justify-between gap-3 mb-3.5">
                     {/* Custom Icon Container */}
-                    <div className="w-12 h-12 sm:w-13 sm:h-13 rounded-xl bg-[#E9F6EC] text-[#07843B] group-hover:bg-[#07843B] group-hover:text-white transition-colors duration-200 flex items-center justify-center shrink-0 border border-[#E5EBE6] shadow-xs group-hover:scale-105">
+                    <div className="w-12 h-12 sm:w-13 sm:h-13 rounded-xl bg-[#EBF8F2] text-[#00A86B] group-hover:bg-[#00A86B] group-hover:text-white transition-colors duration-200 flex items-center justify-center shrink-0 border border-[#66CDAA]/30 shadow-xs group-hover:scale-105">
                       <Icon className="w-6 h-6 sm:w-7 sm:h-7" />
                     </div>
 
                     {/* Establishment count badge */}
-                    <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-[#F7F9F7] text-[#68746C] group-hover:bg-[#E9F6EC] group-hover:text-[#07843B] border border-[#E5EBE6] transition-colors shrink-0">
+                    <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-[#F7F9F7] text-[#586B60] group-hover:bg-[#EBF8F2] group-hover:text-[#00553A] border border-[#E5EBE6] transition-colors shrink-0">
                       {count > 0 ? `${count} ${count === 1 ? 'loja' : 'lojas'}` : 'Explorar'}
                     </span>
                   </div>
 
                   {/* Title: Inter SemiBold */}
-                  <h3 className="text-sm sm:text-base font-semibold text-[#17251D] group-hover:text-[#07843B] transition-colors leading-snug line-clamp-1">
+                  <h3 className="text-sm sm:text-base font-semibold text-[#12221A] group-hover:text-[#00A86B] transition-colors leading-snug line-clamp-1">
                     {cat.name}
                   </h3>
 
                   {/* Subtitle / Description */}
-                  <p className="text-xs text-[#68746C] mt-1.5 leading-relaxed line-clamp-2">
+                  <p className="text-xs text-[#586B60] mt-1.5 leading-relaxed line-clamp-2">
                     {cat.subtitle}
                   </p>
                 </div>
 
                 {/* Popular tags & Explore footer */}
                 <div className="mt-4 pt-3 border-t border-[#E5EBE6]/70 flex items-center justify-between text-[11px]">
-                  <span className="text-[#68746C] truncate max-w-[130px] font-normal">
+                  <span className="text-[#586B60] truncate max-w-[130px] font-normal">
                     {cat.popularItems.slice(0, 2).join(' • ')}
                   </span>
 
-                  <span className="text-[#07843B] font-semibold flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                  <span className="text-[#00A86B] font-semibold flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
                     <span>Ver lojas</span>
                     <ArrowRight className="w-3 h-3" />
                   </span>
@@ -454,12 +454,12 @@ export const FeaturedCategories: React.FC<FeaturedCategoriesProps> = ({
                 onNavigate('categories');
               }
             }}
-            className="group flex flex-col justify-between p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-[#07552F] to-[#07843B] text-white shadow-xs hover:shadow-md transition-all duration-200 cursor-pointer text-left hover:-translate-y-1 border border-[#07552F]"
+            className="group flex flex-col justify-between p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-[#00553A] to-[#00A86B] text-white shadow-xs hover:shadow-md transition-all duration-200 cursor-pointer text-left hover:-translate-y-1 border border-[#00553A]"
             aria-label="Ver todas as categorias comerciais de Mairiporã"
           >
             <div>
               <div className="flex items-center justify-between mb-3.5">
-                <div className="w-12 h-12 sm:w-13 sm:h-13 rounded-xl bg-white/15 text-white flex items-center justify-center shrink-0 border border-white/20 group-hover:bg-white group-hover:text-[#07843B] transition-colors duration-200 group-hover:scale-105">
+                <div className="w-12 h-12 sm:w-13 sm:h-13 rounded-xl bg-white/15 text-white flex items-center justify-center shrink-0 border border-white/20 group-hover:bg-white group-hover:text-[#00553A] transition-colors duration-200 group-hover:scale-105">
                   <Store className="w-6 h-6 sm:w-7 sm:h-7" />
                 </div>
                 <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-white/20 text-white border border-white/20">
@@ -467,18 +467,18 @@ export const FeaturedCategories: React.FC<FeaturedCategoriesProps> = ({
                 </span>
               </div>
 
-              <h3 className="text-sm sm:text-base font-bold text-white group-hover:text-[#F4E500] transition-colors leading-snug">
+              <h3 className="text-sm sm:text-base font-bold text-white group-hover:text-[#FFD700] transition-colors leading-snug">
                 Catálogo Geral
               </h3>
 
-              <p className="text-xs text-white/80 mt-1.5 leading-relaxed">
+              <p className="text-xs text-white/90 mt-1.5 leading-relaxed">
                 Descubra todos os comércios, prestadores de serviços e produtores rurais de Mairiporã.
               </p>
             </div>
 
             <div className="mt-4 pt-3 border-t border-white/20 flex items-center justify-between text-[11px] font-semibold">
               <span className="text-white/90">Acessar índice</span>
-              <span className="flex items-center gap-1 text-[#F4E500] group-hover:translate-x-1 transition-transform">
+              <span className="flex items-center gap-1 text-[#FFD700] group-hover:translate-x-1 transition-transform">
                 <span>Abrir guia</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </span>
