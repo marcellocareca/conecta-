@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Paleta Oficial Conecta Mairiporã */
+    --color-verde-principal: #07843B;
+    --color-verde-escuro: #07552F;
+    --color-verde-claro: #E9F6EC;
+    --color-verde-destaque: #35B956;
+    --color-azul-logo: #0879D9;
+    --color-amarelo-logo: #F4E500;
+    --color-branco: #FFFFFF;
+    --color-fundo-geral: #F7F9F7;
+    --color-texto-principal: #17251D;
+    --color-texto-secundario: #68746C;
+    --color-bordas: #E5EBE6;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--color-texto-principal);
+    background-color: var(--color-fundo-geral);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Utilitários Padronizados */
+.btn-primary {
+  background-color: #07843B;
+  color: #FFFFFF;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  transition: all 0.15s ease-in-out;
+}
+.btn-primary:hover {
+  background-color: #07552F;
+}
+
+.btn-secondary {
+  background-color: #FFFFFF;
+  color: #07843B;
+  border: 1px solid #07843B;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  transition: all 0.15s ease-in-out;
+}
+.btn-secondary:hover {
+  background-color: #E9F6EC;
+}
+
+/* Card Padrão Mercado / Apple Clean */
+.card-clean {
+  background-color: #FFFFFF;
+  border: 1px solid #E5EBE6;
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03);
+  transition: all 0.2s ease-in-out;
+}
+.card-clean:hover {
+  border-color: #07843B;
+  box-shadow: 0 4px 12px 0 rgba(7, 132, 59, 0.08);
+}
+
+/* Focus Rings com o verde oficial */
+:focus-visible {
+  outline: 2px solid #07843B;
+  outline-offset: 2px;
+}
+
+@keyframes carouselProgress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+.animate-carousel-progress {
+  animation: carouselProgress 5s linear forwards;
+}

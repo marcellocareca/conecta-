@@ -1,0 +1,42 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Função auxiliar para verificar se é administrador
+    function isAdmin() {
+      return request.auth != null && (
+        request.auth.token.admin == true ||
+        request.auth.token.email.matches(".*@conectamairipora\\.com\\.br$")
+      );
+    }
+
+    // Categorias: leitura pública, edição apenas admin
+    match /categories/{categoryId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Empresas:
+    // - Qualquer pessoa pode ver estabelecimentos aprovados
+    // - Qualquer pessoa pode submeter novo cadastro (com status 'pending')
+    // - Somente admin pode alterar status para 'approved', editar ou deletar
+    match /businesses/{businessId} {
+      allow read: if resource.data.status == 'approved' || isAdmin();
+      allow create: if request.resource.data.status == 'pending';
+      allow update, delete: if isAdmin();
+    }
+
+    // Produtos e Ofertas:
+    // - Leitura pública para todos os visitantes
+    // - Escrita apenas por administradores ou donos autorizados da loja
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Métricas e logs internos: apenas administradores
+    match /system/{docId} {
+      allow read, write: if isAdmin();
+    }
+  }
+}

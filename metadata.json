@@ -1,0 +1,6 @@
+{
+  "name": "Conecta Mairiporã",
+  "description": "Plataforma digital do comércio local e serviços de Mairiporã - SP. Conectando moradores às melhores lojas, ofertas e profissionais da cidade.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
