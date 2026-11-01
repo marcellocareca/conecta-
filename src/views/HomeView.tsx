@@ -9,9 +9,7 @@ import { IntuitiveBentoPortal } from '../components/home/IntuitiveBentoPortal';
 import { WaveDivider } from '../components/common/WaveDivider';
 import { 
   ArrowRight, 
-  ChevronRight,
-  Sparkles,
-  Store as StoreIcon
+  ChevronRight
 } from 'lucide-react';
 
 interface HomeViewProps {
@@ -318,7 +316,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
         </div>
       </section>
 
-      {/* TRANSIÇÃO EM ONDA SUAVE: Ofertas (#E2ECE5) -> Banner de Cadastro Oficial (#00553A) */}
+      {/* TRANSIÇÃO EM ONDA SUAVE: Ofertas (#E2ECE5) -> Rodapé Oficial (#00553A) */}
       <div className="bg-[#E2ECE5] w-full overflow-hidden leading-none relative z-10 -mb-[1px]">
         <WaveDivider 
           variant="gentle-swell" 
@@ -329,53 +327,6 @@ export const HomeView: React.FC<HomeViewProps> = ({
           heightClassName="h-10 sm:h-14 md:h-20"
         />
       </div>
-
-      {/* 7. ZONA JADE DARK (#00553A) COM ACENTO GOLD (#FFD700): CALL TO ACTION */}
-      <section className="bg-gradient-to-r from-[#00553A] via-[#00A86B] to-[#00553A] text-white pt-6 pb-16 relative overflow-hidden">
-        {/* Subtle decorative background pattern */}
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#FFD700_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-8 bg-white/10 backdrop-blur-md rounded-3xl p-8 sm:p-12 border border-white/20 shadow-xl">
-            <div className="max-w-2xl">
-              <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FFD700] text-[#12221A] text-xs font-black tracking-wide uppercase shadow-xs mb-3">
-                <Sparkles className="w-3.5 h-3.5 text-[#00553A]" />
-                Juntos, o comércio local fica mais forte
-              </span>
-              <h2 className="text-2xl sm:text-4xl font-black mt-1 leading-tight text-white">
-                Divulgue seu comércio gratuitamente em Mairiporã
-              </h2>
-              <p className="mt-3 text-sm sm:text-base text-[#EBF8F2] leading-relaxed font-normal">
-                Receba clientes diretamente no WhatsApp oficial da sua loja, aumente suas vendas e faça parte da plataforma digital oficial que valoriza quem produz em nossa cidade.
-              </p>
-              
-              <div className="mt-6 flex flex-wrap gap-3">
-                <button
-                  onClick={onOpenRegisterModal ? onOpenRegisterModal : () => onNavigate('register-business')}
-                  className="px-6 py-3.5 bg-[#FFD700] hover:bg-[#e6c200] text-[#12221A] font-black text-sm sm:text-base rounded-2xl transition-all shadow-lg hover:shadow-xl flex items-center gap-3 cursor-pointer group active:scale-95"
-                >
-                  <div className="w-7 h-7 rounded-full bg-[#00553A] text-[#FFD700] flex items-center justify-center font-black text-xl leading-none shadow-xs group-hover:scale-110 group-hover:rotate-90 transition-transform">
-                    +
-                  </div>
-                  <span>Cadastre Aqui Seu Comércio Grátis</span>
-                </button>
-                <button
-                  onClick={() => onNavigate('about')}
-                  className="px-6 py-3.5 bg-white/15 hover:bg-white/25 text-white font-semibold text-sm rounded-2xl transition-colors border border-white/25 cursor-pointer backdrop-blur-xs"
-                >
-                  Conheça o Projeto
-                </button>
-              </div>
-            </div>
-
-            <div className="hidden lg:flex items-center justify-center relative shrink-0">
-              <div className="w-48 h-48 rounded-full bg-[#66CDAA]/25 border-2 border-white/30 flex items-center justify-center backdrop-blur-md shadow-inner">
-                <StoreIcon className="w-24 h-24 text-white opacity-95" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
     </div>
   );

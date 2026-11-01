@@ -216,7 +216,7 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({ onNavigate, onSearch
           </div>
 
           {/* Main Headline - Required: 'Compre em Mairiporã' */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-none min-h-[90px] sm:min-h-[115px]">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight sm:leading-none min-h-[72px] sm:min-h-[90px] md:min-h-[115px]">
             {currentSlide.title} <br />
             <span className="text-[#66CDAA] drop-shadow-sm">{currentSlide.titleHighlight}</span>
           </h1>
@@ -327,18 +327,18 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({ onNavigate, onSearch
       </div>
 
       {/* Floating Search Bar with clean glassmorphic aesthetic */}
-      <div className="relative z-30 max-w-3xl mx-auto px-4 mt-4 sm:mt-6 mb-4 sm:mb-6">
+      <div className="relative z-30 max-w-3xl mx-auto px-3 sm:px-4 mt-3 sm:mt-6 mb-3 sm:mb-6">
         <form 
           onSubmit={handleSearchSubmit}
-          className="bg-white/95 backdrop-blur-md rounded-full p-2 pl-6 shadow-2xl border border-white/70 flex items-center justify-between gap-2 ring-4 ring-black/10 transition-all hover:ring-[#66CDAA]/30"
+          className="bg-white/95 backdrop-blur-md rounded-full p-1.5 sm:p-2 pl-4 sm:pl-6 shadow-2xl border border-white/70 flex items-center justify-between gap-1.5 sm:gap-2 ring-4 ring-black/10 transition-all hover:ring-[#66CDAA]/30"
         >
-          <div className="flex items-center gap-3 flex-1 min-w-0 pr-2">
-            <Search className="w-5 h-5 text-[#586B60] shrink-0" />
+          <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0 pr-1 sm:pr-2">
+            <Search className="w-4 h-4 sm:w-5 sm:h-5 text-[#586B60] shrink-0" />
             <input
               type="text"
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
-              placeholder="O que você está procurando em Mairiporã?"
+              placeholder="O que procura em Mairiporã?"
               className="w-full text-xs sm:text-sm text-[#00553A] placeholder-[#586B60] bg-transparent focus:outline-none truncate font-medium"
             />
             <VoiceSearchButton
@@ -350,7 +350,7 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({ onNavigate, onSearch
           </div>
           <button
             type="submit"
-            className="px-6 sm:px-8 py-3 bg-[#00A86B] hover:bg-[#00553A] text-white font-bold text-xs sm:text-sm rounded-full transition-all shrink-0 shadow-md hover:shadow-lg active:scale-95 cursor-pointer"
+            className="px-5 sm:px-8 py-2.5 sm:py-3 bg-[#00A86B] hover:bg-[#00553A] text-white font-bold text-xs sm:text-sm rounded-full transition-all shrink-0 shadow-md hover:shadow-lg active:scale-95 cursor-pointer"
           >
             Buscar
           </button>
