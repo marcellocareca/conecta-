@@ -23,7 +23,9 @@ import {
   RefreshCw,
   Search,
   Sparkles,
-  Film
+  Film,
+  Download,
+  FolderArchive
 } from 'lucide-react';
 import { AdminMediaTab } from '../components/admin/AdminMediaTab';
 import { MediaUploader } from '../components/admin/MediaUploader';
@@ -44,7 +46,7 @@ export const AdminView: React.FC<AdminViewProps> = ({
   onLogout,
   onRefresh
 }) => {
-  const [activeAdminTab, setActiveAdminTab] = useState<'businesses' | 'products' | 'categories' | 'media' | 'stats' | 'firebase'>('businesses');
+  const [activeAdminTab, setActiveAdminTab] = useState<'businesses' | 'products' | 'categories' | 'media' | 'stats' | 'firebase' | 'hostgator'>('businesses');
   const [businessStatusFilter, setBusinessStatusFilter] = useState<'all' | 'pending' | 'approved' | 'rejected'>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -236,7 +238,16 @@ export const AdminView: React.FC<AdminViewProps> = ({
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2">
+          <a
+            href="/conecta-mairipora-hostgator.zip"
+            download="conecta-mairipora-hostgator.zip"
+            className="px-4 py-2 bg-[#07843B] hover:bg-[#066e31] text-white text-xs font-bold rounded-xl transition-all shadow-xs hover:shadow-md flex items-center gap-1.5 cursor-pointer"
+            title="Baixar pacote compilado (.zip) com .htaccess pronto para o cPanel da HostGator"
+          >
+            <Download className="w-4 h-4" />
+            <span>Baixar ZIP HostGator</span>
+          </a>
           <button
             onClick={onLogout}
             className="px-4 py-2 bg-red-50 hover:bg-red-100 text-red-700 text-xs font-bold rounded-xl transition-colors flex items-center gap-1.5 cursor-pointer"
@@ -333,6 +344,7 @@ export const AdminView: React.FC<AdminViewProps> = ({
           { id: 'media', label: 'Mídias da Página & Vídeos', icon: Film },
           { id: 'stats', label: 'Métricas & Bairros', icon: BarChart3 },
           { id: 'firebase', label: 'Conexão Firebase & Dados', icon: Database },
+          { id: 'hostgator', label: '📦 Publicação HostGator (.zip)', icon: FolderArchive },
         ].map(tab => {
           const Icon = tab.icon;
           const isActive = activeAdminTab === tab.id;
@@ -804,6 +816,119 @@ VITE_FIREBASE_APP_ID="seu_app_id"`}
               <p className="text-[#68746C]">
                 3. O arquivo <code>firestore.rules</code> já está criado na raiz do projeto com as regras de segurança oficiais (leitura pública, escrita de novos cadastros como <em>pending</em> e moderação restrita ao administrador).
               </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* TAB 6: HOSTGATOR DEPLOYMENT PACKAGE */}
+      {activeAdminTab === 'hostgator' && (
+        <div className="space-y-6 animate-in fade-in">
+          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#E5EBE6] shadow-xs space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#E5EBE6]">
+              <div className="space-y-1">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>Compilação de Produção Concluída</span>
+                </div>
+                <h3 className="text-xl font-extrabold text-[#17251D]">
+                  Pacote Pronto para Publicação na HostGator (cPanel + Apache)
+                </h3>
+                <p className="text-xs sm:text-sm text-[#68746C]">
+                  Não é necessário instalar Node.js, Git ou terminal no seu computador. Tudo já está compilado e pronto para o Gerenciador de Arquivos.
+                </p>
+              </div>
+
+              <a
+                href="/conecta-mairipora-hostgator.zip"
+                download="conecta-mairipora-hostgator.zip"
+                className="px-6 py-3.5 bg-[#07843B] hover:bg-[#066e31] text-white text-sm font-extrabold rounded-xl transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 cursor-pointer shrink-0"
+              >
+                <Download className="w-5 h-5" />
+                <span>Baixar Pacote ZIP (8.7 MB)</span>
+              </a>
+            </div>
+
+            {/* Checklist of files included */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="p-4 rounded-xl bg-[#F7F9F7] border border-[#E5EBE6] space-y-3">
+                <h4 className="text-xs font-extrabold uppercase tracking-wider text-[#17251D] flex items-center gap-2">
+                  <FolderArchive className="w-4 h-4 text-[#07843B]" />
+                  Conteúdo do Arquivo ZIP
+                </h4>
+                <ul className="text-xs text-[#68746C] space-y-2">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#07843B] shrink-0 mt-0.5" />
+                    <span><strong>index.html:</strong> Ponto de entrada compilado com todo o catálogo, moderação e design responsivo.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#07843B] shrink-0 mt-0.5" />
+                    <span><strong>.htaccess:</strong> Configuração Apache com mod_rewrite para rotas limpas, mod_deflate (gzip) e cache de assets.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#07843B] shrink-0 mt-0.5" />
+                    <span><strong>assets/:</strong> Todos os scripts JavaScript e folhas de estilo CSS compactados e minificados.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#07843B] shrink-0 mt-0.5" />
+                    <span><strong>images/ & logos:</strong> Logotipo oficial colorido de Mairiporã em alta resolução e ícones das categorias.</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="p-4 rounded-xl bg-amber-50/50 border border-amber-200 space-y-3">
+                <h4 className="text-xs font-extrabold uppercase tracking-wider text-amber-900 flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-amber-600" />
+                  Vantagens do Pacote Compilado
+                </h4>
+                <ul className="text-xs text-amber-900/80 space-y-2">
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-600 mt-1.5 shrink-0" />
+                    <span><strong>Carregamento Ultra-rápido:</strong> O Apache da HostGator serve os arquivos estáticos diretamente sem consumir processamento do servidor.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-600 mt-1.5 shrink-0" />
+                    <span><strong>Compatível com qualquer plano:</strong> Hospedagem P, M, Business ou Turbo da HostGator.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-600 mt-1.5 shrink-0" />
+                    <span><strong>Vídeo em loop na capa:</strong> Conectado diretamente a <code>https://gufomoda.com.br/conecta.mp4</code> sem pesar no seu plano.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Step-by-step instructions */}
+            <div className="border border-[#E5EBE6] rounded-xl p-5 space-y-4">
+              <h4 className="text-sm font-extrabold text-[#17251D]">
+                Passo a Passo para Instalar no cPanel da HostGator:
+              </h4>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                <div className="p-3 bg-[#F7F9F7] rounded-xl border border-[#E5EBE6] space-y-1.5">
+                  <span className="w-6 h-6 rounded-full bg-[#07843B] text-white text-xs font-extrabold flex items-center justify-center">1</span>
+                  <div className="font-bold text-xs text-[#17251D]">Acesse o cPanel</div>
+                  <p className="text-[11px] text-[#68746C]">Entre em <code>seudominio.com.br/cpanel</code> com o usuário e senha da HostGator.</p>
+                </div>
+
+                <div className="p-3 bg-[#F7F9F7] rounded-xl border border-[#E5EBE6] space-y-1.5">
+                  <span className="w-6 h-6 rounded-full bg-[#07843B] text-white text-xs font-extrabold flex items-center justify-center">2</span>
+                  <div className="font-bold text-xs text-[#17251D]">Gerenciador de Arquivos</div>
+                  <p className="text-[11px] text-[#68746C]">Abra o <strong>Gerenciador de Arquivos</strong> e entre na pasta <code>public_html</code>.</p>
+                </div>
+
+                <div className="p-3 bg-[#F7F9F7] rounded-xl border border-[#E5EBE6] space-y-1.5">
+                  <span className="w-6 h-6 rounded-full bg-[#07843B] text-white text-xs font-extrabold flex items-center justify-center">3</span>
+                  <div className="font-bold text-xs text-[#17251D]">Carregar o ZIP</div>
+                  <p className="text-[11px] text-[#68746C]">Clique no botão <strong>Carregar</strong> no topo e envie o arquivo <code>conecta-mairipora-hostgator.zip</code>.</p>
+                </div>
+
+                <div className="p-3 bg-[#F7F9F7] rounded-xl border border-[#E5EBE6] space-y-1.5">
+                  <span className="w-6 h-6 rounded-full bg-[#07843B] text-white text-xs font-extrabold flex items-center justify-center">4</span>
+                  <div className="font-bold text-xs text-[#17251D]">Extrair Arquivos</div>
+                  <p className="text-[11px] text-[#68746C]">Clique com o botão direito no zip enviado e selecione <strong>Extrair (Extract)</strong>. Pronto!</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

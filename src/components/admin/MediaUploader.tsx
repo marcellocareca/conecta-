@@ -106,8 +106,8 @@ export const MediaUploader: React.FC<MediaUploaderProps> = ({
     }
   };
 
-  const handleUrlSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleUrlSubmit = (e?: React.FormEvent | React.MouseEvent | React.KeyboardEvent) => {
+    if (e && 'preventDefault' in e) e.preventDefault();
     if (!urlInput.trim()) return;
     setErrorMessage(null);
     onMediaSelected(urlInput.trim());
@@ -215,23 +215,30 @@ export const MediaUploader: React.FC<MediaUploaderProps> = ({
         </div>
       )}
 
-      {/* URL Mode */}
+      {/* URL Mode - uses div container to prevent nested form validation errors in modals */}
       {activeMode === 'url' && (
-        <form onSubmit={handleUrlSubmit} className="flex gap-2">
+        <div className="flex gap-2">
           <input
             type="url"
             value={urlInput}
             onChange={(e) => setUrlInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                handleUrlSubmit(e);
+              }
+            }}
             placeholder={mediaType === 'image' ? 'https://exemplo.com/imagem.jpg' : 'https://exemplo.com/video.mp4'}
             className="flex-1 px-3 py-2 text-xs border border-[#E2ECE5] rounded-xl focus:border-[#00A86B] focus:ring-1 focus:ring-[#00A86B] outline-none text-[#17251D]"
           />
           <button
-            type="submit"
+            type="button"
+            onClick={handleUrlSubmit}
             className="px-4 py-2 bg-[#00A86B] hover:bg-[#00553A] text-white text-xs font-bold rounded-xl transition-colors cursor-pointer shrink-0"
           >
             Aplicar
           </button>
-        </form>
+        </div>
       )}
 
       {/* Error Message */}
@@ -277,7 +284,7 @@ export const MediaUploader: React.FC<MediaUploaderProps> = ({
                   (e.target as HTMLImageElement).src = '/images/placeholder_store.png';
                 }}
               />
-            ) : (
+            ) : currentUrl ? (
               <video
                 src={currentUrl}
                 className="w-12 h-16 object-cover rounded-lg border border-[#E2ECE5] bg-black shrink-0"
@@ -285,8 +292,11 @@ export const MediaUploader: React.FC<MediaUploaderProps> = ({
                 loop
                 autoPlay
                 playsInline
+                onError={(e) => {
+                  (e.target as HTMLVideoElement).style.opacity = '0';
+                }}
               />
-            )}
+            ) : null}
             <div className="overflow-hidden">
               <span className="text-xs font-bold text-[#17251D] block truncate">
                 Mídia ativa

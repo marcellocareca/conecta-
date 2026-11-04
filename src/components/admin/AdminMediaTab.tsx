@@ -371,6 +371,9 @@ export const AdminMediaTab: React.FC<AdminMediaTabProps> = ({
                     muted
                     loop
                     playsInline
+                    onError={(e) => {
+                      (e.target as HTMLVideoElement).style.opacity = '0';
+                    }}
                     onMouseEnter={(e) => (e.target as HTMLVideoElement).play().catch(() => {})}
                     onMouseLeave={(e) => (e.target as HTMLVideoElement).pause()}
                   />
@@ -464,6 +467,9 @@ export const AdminMediaTab: React.FC<AdminMediaTabProps> = ({
                   loop
                   muted
                   playsInline
+                  onError={(e) => {
+                    (e.target as HTMLVideoElement).style.opacity = '0';
+                  }}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute top-2 left-2 bg-black/60 backdrop-blur-xs text-white text-[10px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1.5">

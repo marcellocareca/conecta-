@@ -162,19 +162,19 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               onClick={onOpenRegisterModal ? onOpenRegisterModal : () => handleNavClick('register-business')}
               className="hidden lg:inline-flex items-center gap-2.5 px-4 py-2 rounded-full text-sm font-bold text-white bg-[#00A86B] hover:bg-[#00553A] shadow-sm hover:shadow-md transition-all duration-200 active:scale-95 group cursor-pointer border border-[#00A86B] shrink-0"
-              title="Cadastre aqui seu comércio - 100% Gratuito"
+              title="Cadastre seu negócio aqui - 100% Gratuito"
             >
               <div className="w-6 h-6 rounded-full bg-[#FFD700] text-[#12221A] flex items-center justify-center font-black text-xl leading-none shrink-0 group-hover:scale-110 group-hover:rotate-90 transition-transform shadow-xs">
                 +
               </div>
-              <span className="tracking-tight whitespace-nowrap">Cadastrar Loja</span>
+              <span className="tracking-tight whitespace-nowrap">Cadastrar Negócio</span>
             </button>
 
             {/* Compact mobile & tablet button for Cadastrar Loja with prominent + */}
             <button
               onClick={onOpenRegisterModal ? onOpenRegisterModal : () => handleNavClick('register-business')}
               className="lg:hidden flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full bg-[#EBF8F2] hover:bg-[#00A86B] text-[#00A86B] hover:text-white border border-[#00A86B]/30 font-bold text-xs transition-all active:scale-95 cursor-pointer shrink-0"
-              title="Cadastre seu comércio em Mairiporã"
+              title="Cadastre seu negócio aqui em Mairiporã"
             >
               <div className="w-5 h-5 rounded-full bg-[#00A86B] text-[#FFD700] flex items-center justify-center font-black text-base shrink-0 leading-none">
                 +

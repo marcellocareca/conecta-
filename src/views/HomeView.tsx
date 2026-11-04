@@ -81,8 +81,32 @@ export const HomeView: React.FC<HomeViewProps> = ({
         />
       </section>
 
-      {/* TRANSIÇÃO EM ONDA SUAVE: Portal Bento (#E6F7F0) -> Categorias em Destaque (#FFFFFF) */}
+      {/* TRANSIÇÃO EM ONDA SUAVE: Portal Bento (#E6F7F0) -> Vídeos 9x16 (#00553A) */}
       <div className="bg-[#E6F7F0] w-full overflow-hidden leading-none relative z-10 -mb-[1px]">
+        <WaveDivider 
+          variant="multi-layered" 
+          fillColor="#00553A" 
+          secondaryFill="#00A86B" 
+          position="top" 
+          className="w-full block" 
+          heightClassName="h-10 sm:h-14 md:h-20"
+        />
+      </div>
+
+      {/* 3. ZONA JADE ASCENT - DARK (#00553A): VÍDEOS EM FORMATO 9x16 (Comércio em Ação em Mairiporã) */}
+      <section className="bg-gradient-to-b from-[#00553A] via-[#014730] to-[#00553A] pt-2 pb-6 relative overflow-hidden text-white">
+        {/* Subtle radial decorative glow with Gold & Jade Light */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-[#66CDAA]/10 rounded-full blur-3xl pointer-events-none" />
+
+        <VerticalVideoSection 
+          onSelectStore={onSelectStore} 
+          onNavigate={onNavigate} 
+          isDarkTheme={true}
+        />
+      </section>
+
+      {/* TRANSIÇÃO EM ONDA SUAVE: Vídeos (#00553A) -> Categorias em Destaque (#FFFFFF) */}
+      <div className="bg-[#00553A] w-full overflow-hidden leading-none relative z-10 -mb-[1px]">
         <WaveDivider 
           variant="organic-2" 
           fillColor="#FFFFFF" 
@@ -93,7 +117,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
         />
       </div>
 
-      {/* 3. SETORIZAÇÃO COMERCIAL: CATEGORIAS EM DESTAQUE */}
+      {/* 4. SETORIZAÇÃO COMERCIAL: CATEGORIAS EM DESTAQUE */}
       <section className="bg-white pt-2 pb-8 px-0 relative">
         <FeaturedCategories
           categories={categories}
@@ -197,40 +221,15 @@ export const HomeView: React.FC<HomeViewProps> = ({
         </div>
       </section>
 
-      {/* TRANSIÇÃO EM ONDA SUAVE: Lojas (#EBF8F2) -> Vídeos 9x16 (#00553A) */}
+      {/* TRANSIÇÃO EM ONDA SUAVE: Lojas (#EBF8F2) -> Ofertas (#EBF8F2) */}
       <div className="bg-[#EBF8F2] w-full overflow-hidden leading-none relative z-10 -mb-[1px]">
         <WaveDivider 
-          variant="multi-layered" 
-          fillColor="#00553A" 
-          secondaryFill="#00A86B" 
+          variant="gentle-swell" 
+          fillColor="#F4FAF6" 
+          secondaryFill="#66CDAA" 
           position="top" 
           className="w-full block" 
-          heightClassName="h-10 sm:h-14 md:h-20"
-        />
-      </div>
-
-      {/* 5. ZONA JADE ASCENT - DARK (#00553A): VÍDEOS EM FORMATO 9x16 */}
-      <section className="bg-gradient-to-b from-[#00553A] via-[#014730] to-[#00553A] pt-2 pb-6 relative overflow-hidden text-white">
-        {/* Subtle radial decorative glow with Gold & Jade Light */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-[#66CDAA]/10 rounded-full blur-3xl pointer-events-none" />
-
-        <VerticalVideoSection 
-          onSelectStore={onSelectStore} 
-          onNavigate={onNavigate} 
-          isDarkTheme={true}
-        />
-      </section>
-
-      {/* TRANSIÇÃO EM ONDA SUAVE: Vídeos (#00553A) -> Ofertas (#EBF8F2) */}
-      <div className="bg-[#00553A] w-full overflow-hidden leading-none relative z-10 -mb-[1px]">
-        <WaveDivider 
-          variant="deep-crest" 
-          fillColor="#EBF8F2" 
-          secondaryFill="#00553A" 
-          flipX={true}
-          position="top" 
-          className="w-full block" 
-          heightClassName="h-10 sm:h-14 md:h-20"
+          heightClassName="h-8 sm:h-12"
         />
       </div>
 

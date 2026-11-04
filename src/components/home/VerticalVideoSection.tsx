@@ -225,6 +225,9 @@ export const VerticalVideoSection: React.FC<VerticalVideoSectionProps> = ({
                   muted={isMuted}
                   playsInline
                   preload="metadata"
+                  onError={(e) => {
+                    (e.target as HTMLVideoElement).style.opacity = '0';
+                  }}
                   className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-102"
                 />
 
@@ -387,6 +390,9 @@ export const VerticalVideoSection: React.FC<VerticalVideoSectionProps> = ({
               loop
               controls
               playsInline
+              onError={(e) => {
+                console.warn('Video failed to load in modal:', activeModalVideo.videoUrl);
+              }}
               className="w-full h-full object-cover"
             />
 

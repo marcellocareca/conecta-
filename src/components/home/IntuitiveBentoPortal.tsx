@@ -257,7 +257,7 @@ export const IntuitiveBentoPortal: React.FC<IntuitiveBentoPortalProps> = ({
 
           <div className="my-3 sm:my-4 z-10">
             <h3 className="text-lg sm:text-xl md:text-2xl font-black text-white tracking-tight flex items-center gap-2">
-              <span>Cadastre Seu Comércio Aqui</span>
+              <span>Cadastre Seu Negócio Aqui</span>
             </h3>
             <p className="text-xs sm:text-sm text-white/90 mt-1.5 leading-relaxed font-normal">
               Coloque seu negócio no mapa digital de Mairiporã. Receba clientes no WhatsApp sem mensalidades.

@@ -17,6 +17,7 @@ import { ProductDetailModal } from './components/products/ProductDetailModal';
 import { InterestBagModal } from './components/common/InterestBagModal';
 import { LoginModal } from './components/common/LoginModal';
 import { RegisterBusinessModal } from './components/common/RegisterBusinessModal';
+import { RegisterBusinessPromptPopup } from './components/common/RegisterBusinessPromptPopup';
 
 export default function App() {
   const [currentTab, setCurrentTab] = useState<ActiveTab>('home');
@@ -351,6 +352,13 @@ export default function App() {
           handleNavigate('register-business');
         }}
       />
+
+      {/* Pop-up "Cadastre seu negócio aqui" (Automático e Flutuante) */}
+      {currentTab !== 'admin' && (
+        <RegisterBusinessPromptPopup
+          onOpenRegisterModal={() => setIsRegisterModalOpen(true)}
+        />
+      )}
     </div>
   );
 }

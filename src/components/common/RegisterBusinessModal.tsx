@@ -180,7 +180,7 @@ export const RegisterBusinessModal: React.FC<RegisterBusinessModalProps> = ({
             </div>
             <div>
               <h2 id="modal-register-title" className="text-xl sm:text-2xl font-black text-white leading-tight">
-                Cadastre Aqui Seu Comércio
+                Cadastre Seu Negócio Aqui
               </h2>
               <p className="text-xs sm:text-sm text-[#EBF8F2] mt-0.5 font-medium">
                 Conecte seu negócio a milhares de clientes e moradores locais!

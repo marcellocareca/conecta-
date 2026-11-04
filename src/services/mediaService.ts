@@ -1,5 +1,6 @@
 import { ReelVideo } from '../components/home/VerticalVideoSection';
 import { HeroSlide } from '../components/home/HeroCarousel';
+import { DBStorage } from './dbStorage';
 import { 
   ShieldCheck, 
   Truck, 
@@ -154,7 +155,7 @@ export const INITIAL_REELS: ReelVideo[] = [
     storeName: 'Cantina & Hamburgueria da Serra',
     category: 'Gastronomia',
     caption: 'Burgers na brasa com queijo derretido e receitas de família no almoço e jantar.',
-    videoUrl: '/videos/reel_restaurante.mp4',
+    videoUrl: 'https://gufomoda.com.br/conecta.mp4',
     posterUrl: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80',
     whatsapp: '5511993456789',
     likesCount: 342,
@@ -166,7 +167,7 @@ export const INITIAL_REELS: ReelVideo[] = [
     storeName: 'Boutique Cantareira',
     category: 'Moda & Estilo',
     caption: 'Novas peças da coleção outono/inverno com tecidos confortáveis e elegantes.',
-    videoUrl: '/videos/reel_moda.mp4',
+    videoUrl: 'https://gufomoda.com.br/conecta.mp4',
     posterUrl: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&q=80',
     whatsapp: '5511988776655',
     likesCount: 289,
@@ -178,7 +179,7 @@ export const INITIAL_REELS: ReelVideo[] = [
     storeName: 'Café & Padaria Mairiporã',
     category: 'Cafeteria & Padaria',
     caption: 'Café colonial colhido na serra, expresso cremoso e pães caseiros saindo quentinhos.',
-    videoUrl: '/videos/reel_cafe.mp4',
+    videoUrl: 'https://gufomoda.com.br/conecta.mp4',
     posterUrl: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=600&q=80',
     whatsapp: '5511971234567',
     likesCount: 512,
@@ -190,7 +191,7 @@ export const INITIAL_REELS: ReelVideo[] = [
     storeName: 'Flores & Viveiro Mantiqueira',
     category: 'Plantas & Flores',
     caption: 'Orquídeas, mudas e plantas ornamentais direto dos produtores de Mairiporã.',
-    videoUrl: '/videos/reel_flores.mp4',
+    videoUrl: 'https://gufomoda.com.br/conecta.mp4',
     posterUrl: 'https://images.unsplash.com/photo-1508615039623-a25605d2b022?auto=format&fit=crop&w=600&q=80',
     whatsapp: '5511991234567',
     likesCount: 420,
@@ -320,32 +321,96 @@ const notifyMediaChanged = () => {
   mediaListeners.forEach(fn => fn());
 };
 
+// In-memory cache to guarantee synchronous reads with async IndexedDB backup
+let memoryReels: ReelVideo[] | null = null;
+let memorySlides: HeroSlide[] | null = null;
+let memoryBanners: PageBanner[] | null = null;
+let memoryHeroVideo: string | null = null;
+
+// Initial hydration from IndexedDB on startup
+if (typeof window !== 'undefined') {
+  DBStorage.get<ReelVideo[]>(STORAGE_KEYS.REELS).then(stored => {
+    if (stored && Array.isArray(stored) && stored.length > 0) {
+      memoryReels = stored;
+      notifyMediaChanged();
+    }
+  });
+
+  DBStorage.get<HeroSlide[]>(STORAGE_KEYS.HERO_SLIDES).then(stored => {
+    if (stored && Array.isArray(stored) && stored.length > 0) {
+      memorySlides = stored;
+      notifyMediaChanged();
+    }
+  });
+
+  DBStorage.get<PageBanner[]>(STORAGE_KEYS.PAGE_BANNERS).then(stored => {
+    if (stored && Array.isArray(stored) && stored.length > 0) {
+      memoryBanners = stored;
+      notifyMediaChanged();
+    }
+  });
+
+  DBStorage.get<string>(STORAGE_KEYS.HERO_VIDEO).then(stored => {
+    if (stored) {
+      memoryHeroVideo = stored;
+      notifyMediaChanged();
+    }
+  });
+}
+
+const safeSetLocalStorage = (key: string, value: any, fallbackValue?: any) => {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch {
+    console.warn(`LocalStorage quota exceeded for ${key}, falling back to IndexedDB persistent storage.`);
+    if (fallbackValue !== undefined) {
+      try {
+        localStorage.setItem(key, JSON.stringify(fallbackValue));
+      } catch {
+        // Silently handled: IndexedDB has the true persistent data
+      }
+    }
+  }
+};
+
 export const MediaService = {
   // --- REELS (VÍDEOS 9x16) ---
   getReels: (): ReelVideo[] => {
+    if (memoryReels && memoryReels.length > 0) {
+      return memoryReels;
+    }
     try {
       const raw = localStorage.getItem(STORAGE_KEYS.REELS);
-      if (!raw) {
-        localStorage.setItem(STORAGE_KEYS.REELS, JSON.stringify(INITIAL_REELS));
-        return INITIAL_REELS;
+      if (raw) {
+        memoryReels = JSON.parse(raw);
+        return memoryReels!;
       }
-      return JSON.parse(raw);
     } catch {
-      return INITIAL_REELS;
+      // Fallback
     }
+    memoryReels = INITIAL_REELS;
+    return INITIAL_REELS;
   },
 
   saveReels: (reels: ReelVideo[]): void => {
-    try {
-      localStorage.setItem(STORAGE_KEYS.REELS, JSON.stringify(reels));
-      notifyMediaChanged();
-    } catch (e) {
-      console.error('Failed to save reels:', e);
-    }
+    memoryReels = reels;
+    // 1. Persistent storage in IndexedDB (handles 100MB+ without quota issues)
+    DBStorage.set(STORAGE_KEYS.REELS, reels).catch(err => {
+      console.warn('Could not save reels to IndexedDB:', err);
+    });
+
+    // 2. Safe localStorage write (with lightweight fallback if base64 videos exceed 5MB quota)
+    const lightweightReels = reels.map(r => ({
+      ...r,
+      videoUrl: r.videoUrl.startsWith('data:') ? 'https://gufomoda.com.br/conecta.mp4' : r.videoUrl
+    }));
+    safeSetLocalStorage(STORAGE_KEYS.REELS, reels, lightweightReels);
+
+    notifyMediaChanged();
   },
 
   addReel: (reel: Omit<ReelVideo, 'id'>): ReelVideo => {
-    const list = MediaService.getReels();
+    const list = [...MediaService.getReels()];
     const newReel: ReelVideo = {
       ...reel,
       id: `reel-${Date.now()}`
@@ -356,7 +421,7 @@ export const MediaService = {
   },
 
   updateReel: (id: string, updates: Partial<ReelVideo>): void => {
-    const list = MediaService.getReels();
+    const list = [...MediaService.getReels()];
     const index = list.findIndex(r => r.id === id);
     if (index !== -1) {
       list[index] = { ...list[index], ...updates };
@@ -376,37 +441,31 @@ export const MediaService = {
 
   // --- HERO CAROUSEL SLIDES ---
   getHeroSlides: (): HeroSlide[] => {
+    if (memorySlides && memorySlides.length > 0) {
+      return memorySlides;
+    }
     try {
       const raw = localStorage.getItem(STORAGE_KEYS.HERO_SLIDES);
-      if (!raw) {
-        localStorage.setItem(STORAGE_KEYS.HERO_SLIDES, JSON.stringify(INITIAL_HERO_SLIDES));
-        return INITIAL_HERO_SLIDES;
+      if (raw) {
+        memorySlides = JSON.parse(raw);
+        return memorySlides!;
       }
-      const parsed = JSON.parse(raw) as HeroSlide[];
-      // Re-attach icons from INITIAL_HERO_SLIDES if badges lost icon reference
-      return parsed.map((slide, idx) => ({
-        ...slide,
-        badges: slide.badges?.map((b, bIdx) => ({
-          ...b,
-          icon: INITIAL_HERO_SLIDES[idx % INITIAL_HERO_SLIDES.length]?.badges[bIdx % 4]?.icon || ShieldCheck
-        })) || []
-      }));
     } catch {
-      return INITIAL_HERO_SLIDES;
+      // Ignored
     }
+    memorySlides = INITIAL_HERO_SLIDES;
+    return INITIAL_HERO_SLIDES;
   },
 
   saveHeroSlides: (slides: HeroSlide[]): void => {
-    try {
-      localStorage.setItem(STORAGE_KEYS.HERO_SLIDES, JSON.stringify(slides));
-      notifyMediaChanged();
-    } catch (e) {
-      console.error('Failed to save hero slides:', e);
-    }
+    memorySlides = slides;
+    DBStorage.set(STORAGE_KEYS.HERO_SLIDES, slides).catch(() => {});
+    safeSetLocalStorage(STORAGE_KEYS.HERO_SLIDES, slides);
+    notifyMediaChanged();
   },
 
   updateHeroSlide: (id: string, updates: Partial<HeroSlide>): void => {
-    const list = MediaService.getHeroSlides();
+    const list = [...MediaService.getHeroSlides()];
     const index = list.findIndex(s => s.id === id);
     if (index !== -1) {
       list[index] = { ...list[index], ...updates };
@@ -420,29 +479,31 @@ export const MediaService = {
 
   // --- PAGE BANNERS ---
   getPageBanners: (): PageBanner[] => {
+    if (memoryBanners && memoryBanners.length > 0) {
+      return memoryBanners;
+    }
     try {
       const raw = localStorage.getItem(STORAGE_KEYS.PAGE_BANNERS);
-      if (!raw) {
-        localStorage.setItem(STORAGE_KEYS.PAGE_BANNERS, JSON.stringify(INITIAL_PAGE_BANNERS));
-        return INITIAL_PAGE_BANNERS;
+      if (raw) {
+        memoryBanners = JSON.parse(raw);
+        return memoryBanners!;
       }
-      return JSON.parse(raw);
     } catch {
-      return INITIAL_PAGE_BANNERS;
+      // Ignored
     }
+    memoryBanners = INITIAL_PAGE_BANNERS;
+    return INITIAL_PAGE_BANNERS;
   },
 
   savePageBanners: (banners: PageBanner[]): void => {
-    try {
-      localStorage.setItem(STORAGE_KEYS.PAGE_BANNERS, JSON.stringify(banners));
-      notifyMediaChanged();
-    } catch (e) {
-      console.error('Failed to save page banners:', e);
-    }
+    memoryBanners = banners;
+    DBStorage.set(STORAGE_KEYS.PAGE_BANNERS, banners).catch(() => {});
+    safeSetLocalStorage(STORAGE_KEYS.PAGE_BANNERS, banners);
+    notifyMediaChanged();
   },
 
   updatePageBanner: (id: string, updates: Partial<PageBanner>): void => {
-    const list = MediaService.getPageBanners();
+    const list = [...MediaService.getPageBanners()];
     const index = list.findIndex(b => b.id === id);
     if (index !== -1) {
       list[index] = { ...list[index], ...updates };
@@ -456,21 +517,29 @@ export const MediaService = {
 
   // --- HERO BACKGROUND VIDEO (LOOPING) ---
   getHeroVideo: (): string => {
+    if (memoryHeroVideo) return memoryHeroVideo;
     try {
       const stored = localStorage.getItem(STORAGE_KEYS.HERO_VIDEO);
-      return stored || DEFAULT_HERO_VIDEO;
+      if (stored) {
+        memoryHeroVideo = stored;
+        return stored;
+      }
     } catch {
-      return DEFAULT_HERO_VIDEO;
+      // Ignored
     }
+    memoryHeroVideo = DEFAULT_HERO_VIDEO;
+    return DEFAULT_HERO_VIDEO;
   },
 
   saveHeroVideo: (url: string): void => {
+    memoryHeroVideo = url;
+    DBStorage.set(STORAGE_KEYS.HERO_VIDEO, url).catch(() => {});
     try {
       localStorage.setItem(STORAGE_KEYS.HERO_VIDEO, url);
-      notifyMediaChanged();
-    } catch (e) {
-      console.error('Failed to save hero video:', e);
+    } catch {
+      // Ignored: IndexedDB has it
     }
+    notifyMediaChanged();
   },
 
   resetHeroVideo: (): void => {

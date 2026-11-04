@@ -101,6 +101,9 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({ onNavigate, onSearch
           loop
           muted={isVideoMuted}
           playsInline
+          onError={() => {
+            console.warn('Hero video playback error handled');
+          }}
           className="w-full h-full object-cover object-center"
         />
         {/* Soft neutral dark overlay for text legibility - zero green tint */}
