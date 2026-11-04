@@ -22,8 +22,12 @@ import {
   MapPin,
   RefreshCw,
   Search,
-  Sparkles
+  Sparkles,
+  Film
 } from 'lucide-react';
+import { AdminMediaTab } from '../components/admin/AdminMediaTab';
+import { MediaUploader } from '../components/admin/MediaUploader';
+import { MEDIA_LIMITS } from '../services/mediaService';
 
 interface AdminViewProps {
   businesses: Business[];
@@ -40,7 +44,7 @@ export const AdminView: React.FC<AdminViewProps> = ({
   onLogout,
   onRefresh
 }) => {
-  const [activeAdminTab, setActiveAdminTab] = useState<'businesses' | 'products' | 'categories' | 'stats' | 'firebase'>('businesses');
+  const [activeAdminTab, setActiveAdminTab] = useState<'businesses' | 'products' | 'categories' | 'media' | 'stats' | 'firebase'>('businesses');
   const [businessStatusFilter, setBusinessStatusFilter] = useState<'all' | 'pending' | 'approved' | 'rejected'>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -326,6 +330,7 @@ export const AdminView: React.FC<AdminViewProps> = ({
           { id: 'businesses', label: `Empresas & Moderação (${businesses.length})`, icon: Building2 },
           { id: 'products', label: `Produtos & Ofertas (${products.length})`, icon: ShoppingBag },
           { id: 'categories', label: `Categorias (${categories.length})`, icon: Layers },
+          { id: 'media', label: 'Mídias da Página & Vídeos', icon: Film },
           { id: 'stats', label: 'Métricas & Bairros', icon: BarChart3 },
           { id: 'firebase', label: 'Conexão Firebase & Dados', icon: Database },
         ].map(tab => {
@@ -678,6 +683,15 @@ export const AdminView: React.FC<AdminViewProps> = ({
         </div>
       )}
 
+      {/* TAB: MEDIA & VIDEOS (REELS, BANNERS, STORE LOGOS & COVERS) */}
+      {activeAdminTab === 'media' && (
+        <AdminMediaTab
+          businesses={businesses}
+          onNotification={showNotification}
+          onRefresh={onRefresh}
+        />
+      )}
+
       {/* TAB 4: METRICS & NEIGHBORHOODS */}
       {activeAdminTab === 'stats' && (
         <div className="space-y-6">
@@ -871,6 +885,26 @@ VITE_FIREBASE_APP_ID="seu_app_id"`}
                     value={editingBusiness.description}
                     onChange={e => setEditingBusiness({ ...editingBusiness, description: e.target.value })}
                     className="w-full px-3 py-2 text-xs border border-[#E5EBE6] rounded-lg focus:border-[#07843B] text-[#17251D]"
+                  />
+                </div>
+
+                <div className="sm:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-[#E5EBE6]">
+                  <MediaUploader
+                    label="Logotipo do Comércio"
+                    mediaType="image"
+                    maxSizeBytes={MEDIA_LIMITS.LOGO_MAX_BYTES}
+                    aspectRatioHint="Quadrado 1:1"
+                    currentUrl={editingBusiness.logoUrl}
+                    onMediaSelected={(url) => setEditingBusiness({ ...editingBusiness, logoUrl: url })}
+                  />
+
+                  <MediaUploader
+                    label="Foto de Capa / Fachada"
+                    mediaType="image"
+                    maxSizeBytes={MEDIA_LIMITS.IMAGE_MAX_BYTES}
+                    aspectRatioHint="Panorâmico 16:9"
+                    currentUrl={editingBusiness.coverUrl}
+                    onMediaSelected={(url) => setEditingBusiness({ ...editingBusiness, coverUrl: url })}
                   />
                 </div>
               </div>

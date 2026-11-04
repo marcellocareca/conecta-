@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Business, Product, Category, ActiveTab } from '../types';
 import { StoreCard } from '../components/stores/StoreCard';
 import { ProductCard } from '../components/products/ProductCard';
@@ -7,6 +7,7 @@ import { FeaturedCategories } from '../components/home/FeaturedCategories';
 import { VerticalVideoSection } from '../components/home/VerticalVideoSection';
 import { IntuitiveBentoPortal } from '../components/home/IntuitiveBentoPortal';
 import { WaveDivider } from '../components/common/WaveDivider';
+import { MediaService, subscribeMediaChanges, PageBanner } from '../services/mediaService';
 import { 
   ArrowRight, 
   ChevronRight
@@ -40,6 +41,14 @@ export const HomeView: React.FC<HomeViewProps> = ({
   onOpenRegisterModal
 }) => {
   const [selectedOfferCategory, setSelectedOfferCategory] = useState<string>('all');
+  const [pageBanners, setPageBanners] = useState<PageBanner[]>(() => MediaService.getPageBanners());
+
+  useEffect(() => {
+    const unsubscribe = subscribeMediaChanges(() => {
+      setPageBanners(MediaService.getPageBanners());
+    });
+    return unsubscribe;
+  }, []);
 
   // Featured stores (approved & flagged as featured)
   const featuredStores = businesses
@@ -110,52 +119,30 @@ export const HomeView: React.FC<HomeViewProps> = ({
       <section className="bg-gradient-to-b from-[#EBF8F2] via-[#F4FAF6] to-[#EBF8F2] pt-4 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           
-          {/* 3 BLOCOS DE DESTAQUE */}
+          {/* 3 BLOCOS DE DESTAQUE DINÂMICOS */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
-            {/* BANNER 1: Ofertas da Semana */}
-            <div 
-              onClick={() => onNavigate('offers')}
-              role="button"
-              tabIndex={0}
-              aria-label="Ver ofertas da semana"
-              className="group relative overflow-hidden rounded-2xl cursor-pointer shadow-xs hover:shadow-md transition-all duration-200 border border-[#E2ECE5]"
-            >
-              <img
-                src="/images/banner_ofertas.png"
-                alt="Ofertas da Semana - Produtos e serviços com preços especiais"
-                className="w-full h-auto object-cover group-hover:scale-102 transition-transform duration-200"
-              />
-            </div>
-
-            {/* BANNER 2: Lojas perto de você */}
-            <div 
-              onClick={() => onNavigate('stores')}
-              role="button"
-              tabIndex={0}
-              aria-label="Encontrar comércios de Mairiporã no mapa"
-              className="group relative overflow-hidden rounded-2xl cursor-pointer shadow-xs hover:shadow-md transition-all duration-200 border border-[#E2ECE5]"
-            >
-              <img
-                src="/images/banner_mapa.png"
-                alt="Lojas perto de você - Encontre comércios de Mairiporã no mapa"
-                className="w-full h-auto object-cover group-hover:scale-102 transition-transform duration-200"
-              />
-            </div>
-
-            {/* BANNER 3: Compre Local */}
-            <div 
-              onClick={() => onNavigate('about')}
-              role="button"
-              tabIndex={0}
-              aria-label="Compre Local - Fortaleça o comércio de Mairiporã"
-              className="group relative overflow-hidden rounded-2xl cursor-pointer shadow-xs hover:shadow-md transition-all duration-200 border border-[#E2ECE5]"
-            >
-              <img
-                src="/images/banner_compre_local.png"
-                alt="Compre Local - Fortaleça o comércio de Mairiporã e gere mais oportunidades"
-                className="w-full h-auto object-cover group-hover:scale-102 transition-transform duration-200"
-              />
-            </div>
+            {pageBanners.map((banner) => (
+              <div 
+                key={banner.id}
+                onClick={() => onNavigate(banner.targetTab)}
+                role="button"
+                tabIndex={0}
+                aria-label={banner.title}
+                className="group relative overflow-hidden rounded-2xl cursor-pointer shadow-xs hover:shadow-md transition-all duration-200 border border-[#E2ECE5] bg-white aspect-16/7 sm:aspect-auto"
+              >
+                <img
+                  src={banner.imageUrl}
+                  alt={banner.altText || banner.title}
+                  className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-200"
+                  onError={(e) => {
+                    // Fallback to initial image if custom upload failed
+                    if (banner.id === 'banner-ofertas') (e.target as HTMLImageElement).src = '/images/banner_ofertas.png';
+                    else if (banner.id === 'banner-mapa') (e.target as HTMLImageElement).src = '/images/banner_mapa.png';
+                    else (e.target as HTMLImageElement).src = '/images/banner_compre_local.png';
+                  }}
+                />
+              </div>
+            ))}
           </div>
 
           {/* SEÇÃO: LOJAS EM DESTAQUE */}

@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 
 interface LogoProps {
   className?: string;
+  imgClassName?: string;
   variant?: 'light' | 'dark' | 'white';
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
   showSubtitle?: boolean;
 }
 
 export const Logo: React.FC<LogoProps> = ({
   className = '',
+  imgClassName = '',
   variant = 'light',
   size = 'md',
   showSubtitle = false
@@ -30,7 +32,16 @@ export const Logo: React.FC<LogoProps> = ({
     sm: 'h-8 sm:h-9 md:h-10',
     md: 'h-10 sm:h-12 md:h-14',
     lg: 'h-12 sm:h-14 md:h-16',
-    xl: 'h-14 sm:h-18 md:h-22'
+    xl: 'h-16 sm:h-20 md:h-24',
+    '2xl': 'h-20 sm:h-26 md:h-32'
+  };
+
+  const maxWidthMap = {
+    sm: 'max-w-[160px] sm:max-w-[190px]',
+    md: 'max-w-[200px] sm:max-w-[240px]',
+    lg: 'max-w-[240px] sm:max-w-[280px]',
+    xl: 'max-w-[320px] sm:max-w-[380px] md:max-w-[440px]',
+    '2xl': 'max-w-[400px] sm:max-w-[480px] md:max-w-[560px]'
   };
 
   const isWhiteVariant = variant === 'white';
@@ -45,9 +56,9 @@ export const Logo: React.FC<LogoProps> = ({
         <img
           src={currentSrc}
           alt="CONECTA MAIRIPORÃ - Comércio Local"
-          className={`${heightMap[size]} w-auto max-w-[190px] sm:max-w-[230px] md:max-w-[270px] object-contain object-left transition-transform duration-200 hover:scale-102 shrink-0 ${
+          className={`${heightMap[size]} w-auto ${maxWidthMap[size]} object-contain object-left transition-transform duration-200 hover:scale-102 shrink-0 ${
             isWhiteVariant ? 'brightness-0 invert drop-shadow-xs' : ''
-          }`}
+          } ${imgClassName}`}
           onError={handleImageError}
         />
       ) : (

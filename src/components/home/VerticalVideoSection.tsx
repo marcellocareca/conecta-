@@ -1,5 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ActiveTab } from '../../types';
+import { MediaService, subscribeMediaChanges } from '../../services/mediaService';
 import { 
   Play, 
   Pause, 
@@ -49,68 +50,15 @@ export const VerticalVideoSection: React.FC<VerticalVideoSectionProps> = ({
   const [activeModalVideo, setActiveModalVideo] = useState<ReelVideo | null>(null);
   const videoRefs = useRef<Record<string, HTMLVideoElement | null>>({});
 
-  const reels: ReelVideo[] = [
-    {
-      id: 'reel-1',
-      storeId: 'emp-02',
-      storeName: 'Cantina & Hamburgueria da Serra',
-      category: 'Gastronomia',
-      caption: 'Burgers na brasa com queijo derretido e receitas de família no almoço e jantar.',
-      videoUrl: '/videos/reel_restaurante.mp4',
-      posterUrl: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80',
-      whatsapp: '5511993456789',
-      likesCount: 342,
-      durationText: '0:15'
-    },
-    {
-      id: 'reel-2',
-      storeId: 'emp-03',
-      storeName: 'Boutique Cantareira',
-      category: 'Moda & Estilo',
-      caption: 'Novas peças da coleção outono/inverno com tecidos confortáveis e elegantes.',
-      videoUrl: '/videos/reel_moda.mp4',
-      posterUrl: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&q=80',
-      whatsapp: '5511988776655',
-      likesCount: 289,
-      durationText: '0:12'
-    },
-    {
-      id: 'reel-3',
-      storeId: 'emp-01',
-      storeName: 'Café & Padaria Mairiporã',
-      category: 'Cafeteria & Padaria',
-      caption: 'Café colonial colhido na serra, expresso cremoso e pães caseiros saindo quentinhos.',
-      videoUrl: '/videos/reel_cafe.mp4',
-      posterUrl: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=600&q=80',
-      whatsapp: '5511971234567',
-      likesCount: 512,
-      durationText: '0:18'
-    },
-    {
-      id: 'reel-4',
-      storeId: 'emp-04',
-      storeName: 'Flores & Viveiro Mantiqueira',
-      category: 'Plantas & Flores',
-      caption: 'Orquídeas, mudas e plantas ornamentais direto dos produtores de Mairiporã.',
-      videoUrl: '/videos/reel_flores.mp4',
-      posterUrl: 'https://images.unsplash.com/photo-1508615039623-a25605d2b022?auto=format&fit=crop&w=600&q=80',
-      whatsapp: '5511991234567',
-      likesCount: 420,
-      durationText: '0:14'
-    },
-    {
-      id: 'reel-5',
-      storeId: 'emp-04',
-      storeName: 'Madeira & Arte Rústica',
-      category: 'Casa & Decoração',
-      caption: 'Móveis planejados e peças artesanais em madeira sustentável para seu lar.',
-      videoUrl: '/videos/reel_artesanato.mp4',
-      posterUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=600&q=80',
-      whatsapp: '5511994567890',
-      likesCount: 198,
-      durationText: '0:20'
-    }
-  ];
+  const [reels, setReels] = useState<ReelVideo[]>(() => MediaService.getReels());
+
+  useEffect(() => {
+    // Subscribe to media changes made in Admin panel
+    const unsubscribe = subscribeMediaChanges(() => {
+      setReels(MediaService.getReels());
+    });
+    return unsubscribe;
+  }, []);
 
   const handleTogglePlay = (id: string) => {
     const video = videoRefs.current[id];

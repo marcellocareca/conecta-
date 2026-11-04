@@ -15,7 +15,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenRegisterModal 
       <div className="border-b border-[#00A86B]/40 py-10 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
-            <Logo variant="white" size="lg" showSubtitle={true} />
+            <Logo 
+              variant="light" 
+              size="xl" 
+              className="bg-white px-4 py-2 rounded-2xl shadow-md"
+              showSubtitle={false} 
+            />
             <p className="mt-3 text-lg font-medium text-[#EBF8F2] italic">
               &ldquo;Juntos, o comércio local fica mais forte.&rdquo;
             </p>
