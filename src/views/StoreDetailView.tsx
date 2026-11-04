@@ -162,13 +162,14 @@ export const StoreDetailView: React.FC<StoreDetailViewProps> = ({
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto px-7 py-3.5 bg-[#07843B] hover:bg-[#07552F] text-white font-semibold text-sm rounded-xl transition-all shadow-xs flex items-center justify-center gap-2.5"
+                className="w-full sm:w-auto px-7 py-3.5 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-extrabold text-sm sm:text-base rounded-2xl transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2.5 active:scale-95 cursor-pointer"
+                title={`Falar com ${store.name} pelo WhatsApp comercial`}
               >
                 <MessageCircle className="w-5 h-5 fill-current" />
-                <span>Falar com a loja pelo WhatsApp</span>
+                <span>Falar com Loja</span>
               </a>
-              <p className="text-[11px] text-[#68746C] text-center mt-2 font-normal">
-                Atendimento rápido direto com a equipe local
+              <p className="text-[11px] text-[#586B60] text-center mt-2 font-medium">
+                Atendimento direto via WhatsApp Comercial cadastrado
               </p>
             </div>
           </div>
@@ -322,6 +323,27 @@ export const StoreDetailView: React.FC<StoreDetailViewProps> = ({
           />
         </div>
       )}
+
+      {/* Mobile Sticky Bottom CTA for Store */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-[#E5EBE6] p-3 shadow-lg flex items-center justify-between gap-3">
+        <div className="min-w-0">
+          <div className="text-xs font-bold text-[#17251D] truncate">{store.name}</div>
+          <div className="text-[11px] text-[#00A86B] font-semibold truncate">{store.neighborhood} · Mairiporã</div>
+        </div>
+        <a
+          href={createWhatsAppUrl(
+            store.whatsapp,
+            `Olá! Vi o estabelecimento "${store.name}" no Conecta Mairiporã e gostaria de atendimento.`
+          )}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="px-5 py-2.5 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-black rounded-xl shadow-md flex items-center gap-2 shrink-0 active:scale-95 cursor-pointer"
+          title={`Falar com ${store.name} pelo WhatsApp comercial`}
+        >
+          <MessageCircle className="w-4 h-4 fill-current" />
+          <span>Falar com Loja</span>
+        </a>
+      </div>
     </div>
   );
 };

@@ -120,15 +120,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             )}
           </div>
 
-          {/* Dual Action Buttons (Inter SemiBold, Botões padronizados) */}
+          {/* Dual Action Buttons */}
           <div className="grid grid-cols-2 gap-2">
             <button
               type="button"
               onClick={() => onViewProduct(product)}
-              className="py-2 px-2.5 bg-white border border-[#E5EBE6] hover:bg-[#E9F6EC] text-[#17251D] hover:text-[#07843B] text-xs font-semibold rounded-xl transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+              className="py-2.5 px-2 bg-white border border-[#E5EBE6] hover:bg-[#E9F6EC] text-[#17251D] hover:text-[#07843B] text-xs font-bold rounded-xl transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
             >
               <Eye className="w-3.5 h-3.5 text-[#68746C]" />
-              <span>Ver produto</span>
+              <span className="truncate">Ver produto</span>
             </button>
 
             <a
@@ -140,10 +140,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               )}
               target="_blank"
               rel="noopener noreferrer"
-              className="py-2 px-2 bg-[#07843B] hover:bg-[#07552F] text-white text-xs font-semibold rounded-xl transition-colors flex items-center justify-center gap-1 shadow-xs"
+              className="py-2.5 px-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold rounded-xl transition-all shadow-xs hover:shadow-md flex items-center justify-center gap-1.5"
+              title={`Falar com ${product.businessName} pelo WhatsApp`}
             >
-              <MessageCircle className="w-3.5 h-3.5 fill-current" />
-              <span>WhatsApp</span>
+              <MessageCircle className="w-4 h-4 fill-current shrink-0" />
+              <span className="truncate">Falar com Loja</span>
             </a>
           </div>
         </div>

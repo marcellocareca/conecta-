@@ -134,10 +134,11 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               )}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-3 px-4 bg-[#07843B] hover:bg-[#07552F] text-white font-semibold text-sm rounded-xl transition-colors shadow-xs flex items-center justify-center gap-2"
+              className="w-full py-3.5 px-4 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-black text-sm sm:text-base rounded-xl transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 cursor-pointer"
+              title={`Falar com ${product.businessName} pelo WhatsApp`}
             >
-              <MessageCircle className="w-4 h-4 fill-current" />
-              <span>Consultar pelo WhatsApp</span>
+              <MessageCircle className="w-5 h-5 fill-current" />
+              <span>Falar com Loja</span>
             </a>
 
             <div className="flex items-center justify-between text-xs text-[#68746C] pt-1">

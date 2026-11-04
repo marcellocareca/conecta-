@@ -127,7 +127,7 @@ export const InterestBagModal: React.FC<InterestBagModalProps> = ({
                               className="inline-flex items-center gap-1 text-[11px] font-bold text-[#07843B] hover:text-[#07552F]"
                             >
                               <MessageCircle className="w-3.5 h-3.5 fill-current" />
-                              Falar no WhatsApp
+                              Falar com Loja
                             </a>
                             <button
                               onClick={() => onRemoveProduct(prod.id)}
@@ -178,7 +178,7 @@ export const InterestBagModal: React.FC<InterestBagModalProps> = ({
                                 className="inline-flex items-center gap-1 text-[11px] font-bold text-[#07843B] hover:text-[#07552F]"
                               >
                                 <MessageCircle className="w-3.5 h-3.5 fill-current" />
-                                WhatsApp
+                                Falar com Loja
                               </a>
                               <button
                                 onClick={() => {

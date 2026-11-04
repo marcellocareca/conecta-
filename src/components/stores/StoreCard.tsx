@@ -75,8 +75,8 @@ export const StoreCard: React.FC<StoreCardProps> = ({
           </div>
         </div>
 
-        {/* Actions bar (WhatsApp button in #07843B hover #07552F) */}
-        <div className="mt-3 pt-2.5 border-t border-[#E5EBE6] flex items-center justify-between">
+        {/* Actions bar */}
+        <div className="mt-3 pt-2.5 border-t border-[#E5EBE6] flex items-center gap-2">
           <a
             href={createWhatsAppUrl(
               store.whatsapp,
@@ -85,15 +85,20 @@ export const StoreCard: React.FC<StoreCardProps> = ({
             onClick={(e) => e.stopPropagation()}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#07843B] hover:text-[#07552F] transition-colors"
+            className="flex-1 py-2 px-2.5 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold rounded-xl transition-all shadow-xs hover:shadow-md flex items-center justify-center gap-1.5 cursor-pointer"
+            title={`Falar com ${store.name} pelo WhatsApp`}
           >
-            <MessageCircle className="w-3.5 h-3.5 fill-current" />
-            <span>Falar no WhatsApp</span>
+            <MessageCircle className="w-3.5 h-3.5 fill-current shrink-0" />
+            <span className="truncate">Falar com Loja</span>
           </a>
 
-          <span className="text-[10px] text-[#68746C] font-medium">
-            Ver detalhes →
-          </span>
+          <button
+            type="button"
+            onClick={() => onSelect(store.id)}
+            className="py-2 px-2.5 bg-[#F7F9F7] hover:bg-gray-200 text-[#17251D] text-xs font-semibold rounded-xl transition-colors shrink-0 cursor-pointer"
+          >
+            Ver loja
+          </button>
         </div>
       </div>
     </div>
