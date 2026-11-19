@@ -298,7 +298,7 @@ export const INITIAL_PAGE_BANNERS: PageBanner[] = [
    STORAGE & REACTIVE SUBSCRIPTION
    ========================================================================= */
 
-export const DEFAULT_HERO_VIDEO = 'https://gufomoda.com.br/conecta.mp4';
+export const DEFAULT_HERO_VIDEO = 'https://conectamairipora.com.br/conecta1.mp4';
 
 const STORAGE_KEYS = {
   REELS: 'conecta_mairipora_reels_v2',

@@ -18,9 +18,11 @@ import { InterestBagModal } from './components/common/InterestBagModal';
 import { LoginModal } from './components/common/LoginModal';
 import { RegisterBusinessModal } from './components/common/RegisterBusinessModal';
 import { RegisterBusinessPromptPopup } from './components/common/RegisterBusinessPromptPopup';
+import { WelcomeView } from './views/WelcomeView';
+import { Tour3DView } from './views/Tour3DView';
 
 export default function App() {
-  const [currentTab, setCurrentTab] = useState<ActiveTab>('home');
+  const [currentTab, setCurrentTab] = useState<ActiveTab>('welcome');
   const [tabParams, setTabParams] = useState<{ search?: string; categoryId?: string }>({});
   
   // Selected Store for StoreDetailView
@@ -34,6 +36,13 @@ export default function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
+  const [gmpQuotaExceeded, setGmpQuotaExceeded] = useState(false);
+
+  useEffect(() => {
+    const handleQuotaExceeded = () => setGmpQuotaExceeded(true);
+    window.addEventListener('gmp-quota-exceeded', handleQuotaExceeded);
+    return () => window.removeEventListener('gmp-quota-exceeded', handleQuotaExceeded);
+  }, []);
 
   // Data states
   const [businesses, setBusinesses] = useState<Business[]>([]);
@@ -157,11 +166,76 @@ export default function App() {
   const savedProductsList = products.filter(p => savedProductIds.has(p.id));
   const totalSavedCount = savedStoreIds.size + savedProductIds.size;
 
+  // If user is on Welcome Page, show the full-screen immersive welcome view with video and login
+  if (currentTab === 'welcome') {
+    return (
+      <div className="min-h-[100dvh] bg-[#F7FAF8]">
+        {gmpQuotaExceeded && (
+          <div className="bg-amber-50 border-b border-amber-200 text-amber-900 px-4 py-2.5 text-xs md:text-sm text-center sticky top-0 z-50 shadow-sm">
+            <span>
+              Google Maps Platform quota reached. If you are the app owner, visit{' '}
+              <a
+                href="https://developers.google.com/maps/ai/ai-studio?utm_campaign=gmp_mcp_codeassist_v1_aistudio#quota_exceeded_errors"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline font-semibold text-amber-950 hover:text-amber-800"
+              >
+                maps developer site
+              </a>{' '}
+              for instructions to update your account.
+            </span>
+          </div>
+        )}
+        <WelcomeView
+          heroVideoUrl="https://conectamairipora.com.br/conecta1.mp4"
+          onEnterAsGuest={() => handleNavigate('home')}
+          onOpenTour3D={() => handleNavigate('tour-3d')}
+          onLoginSuccess={(_email) => {
+            setIsAdminLoggedIn(true);
+            handleNavigate('admin');
+          }}
+          onOpenRegisterModal={() => setIsRegisterModalOpen(true)}
+          totalStoresCount={businesses.filter(b => b.status === 'approved').length || 18}
+        />
+
+        {/* Cadastre Seu Negócio Aqui Popup Modal */}
+        <RegisterBusinessModal
+          isOpen={isRegisterModalOpen}
+          onClose={() => setIsRegisterModalOpen(false)}
+          categories={categories}
+          onSuccess={() => {
+            loadData();
+          }}
+          onNavigateToFullForm={() => {
+            setIsRegisterModalOpen(false);
+            handleNavigate('register-business');
+          }}
+        />
+      </div>
+    );
+  }
+
   // Selected store object for detail view
   const activeStore = businesses.find(b => b.id === selectedStoreId) || null;
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F7F9F7] text-[#17251D] selection:bg-[#07843B] selection:text-white">
+      {gmpQuotaExceeded && (
+        <div className="bg-amber-50 border-b border-amber-200 text-amber-900 px-4 py-2.5 text-xs md:text-sm text-center sticky top-0 z-50 shadow-sm">
+          <span>
+            Google Maps Platform quota reached. If you are the app owner, visit{' '}
+            <a
+              href="https://developers.google.com/maps/ai/ai-studio?utm_campaign=gmp_mcp_codeassist_v1_aistudio#quota_exceeded_errors"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline font-semibold text-amber-950 hover:text-amber-800"
+            >
+              maps developer site
+            </a>{' '}
+            for instructions to update your account.
+          </span>
+        </div>
+      )}
       {/* Header */}
       <Header
         currentTab={currentTab}
@@ -176,13 +250,17 @@ export default function App() {
 
       {/* Main View Container */}
       <main className="flex-1">
-        {loading ? (
+        {loading && currentTab !== 'tour-3d' ? (
           <div className="min-h-[50vh] flex flex-col items-center justify-center space-y-3">
             <div className="w-10 h-10 border-4 border-[#07843B] border-t-transparent rounded-full animate-spin" />
             <p className="text-xs font-bold text-[#68746C]">Carregando Conecta Mairiporã...</p>
           </div>
         ) : (
           <>
+            {currentTab === 'tour-3d' && (
+              <Tour3DView onNavigate={handleNavigate} />
+            )}
+
             {currentTab === 'home' && (
               <HomeView
                 categories={categories}
@@ -263,7 +341,7 @@ export default function App() {
                 categories={categories}
                 onLogout={() => {
                   setIsAdminLoggedIn(false);
-                  handleNavigate('home');
+                  handleNavigate('welcome');
                 }}
                 onRefresh={loadData}
               />

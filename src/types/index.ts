@@ -62,7 +62,9 @@ export interface AdminUser {
 }
 
 export type ActiveTab = 
+  | 'welcome'
   | 'home'
+  | 'tour-3d'
   | 'stores'
   | 'categories'
   | 'offers'

@@ -13,7 +13,9 @@ import {
   PhoneCall, 
   PlusCircle, 
   Plus,
-  ShieldCheck 
+  ShieldCheck,
+  Compass,
+  Globe
 } from 'lucide-react';
 import { VoiceSearchButton } from '../common/VoiceSearchButton';
 import { VoiceSearchModal } from '../common/VoiceSearchModal';
@@ -44,7 +46,9 @@ export const Header: React.FC<HeaderProps> = ({
   const [isVoiceModalOpen, setIsVoiceModalOpen] = useState(false);
 
   const navItems: { id: ActiveTab; label: string; icon: any }[] = [
+    { id: 'welcome', label: 'Em Construção', icon: Compass },
     { id: 'home', label: 'Início', icon: Store },
+    { id: 'tour-3d', label: 'Tour 3D', icon: Globe },
     { id: 'stores', label: 'Lojas', icon: Store },
     { id: 'categories', label: 'Categorias', icon: Layers },
     { id: 'offers', label: 'Promoções', icon: Sparkles },
@@ -112,7 +116,7 @@ export const Header: React.FC<HeaderProps> = ({
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
-                  className={`relative py-2 text-sm font-medium transition-colors duration-150 cursor-pointer ${
+                  className={`relative py-2 text-sm font-medium transition-colors duration-150 cursor-pointer whitespace-nowrap shrink-0 ${
                     isActive 
                       ? 'text-[#00A86B] font-semibold' 
                       : 'text-[#00553A] hover:text-[#00A86B]'

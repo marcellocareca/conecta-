@@ -11,7 +11,8 @@ import {
   ShoppingBag,
   TrendingUp,
   Percent,
-  Search
+  Search,
+  Globe
 } from 'lucide-react';
 
 interface IntuitiveBentoPortalProps {
@@ -275,6 +276,40 @@ export const IntuitiveBentoPortal: React.FC<IntuitiveBentoPortalProps> = ({
               <span>Cadastrar Agora</span>
             </div>
           </div>
+        </div>
+
+        {/* ========================================================
+            BLOCK 6: TOUR 3D INTERATIVO DE MAIRIPORÃ (Google Maps 3D)
+            ======================================================== */}
+        <div
+          onClick={() => onNavigate('tour-3d')}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => { if (e.key === 'Enter') onNavigate('tour-3d'); }}
+          className="md:col-span-12 rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-7 flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative overflow-hidden group cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 text-white bg-[#12221A] border border-[#00A86B]/30"
+          aria-label="Abrir Tour 3D Interativo de Mairiporã no Google Maps"
+        >
+          <div className="flex items-start sm:items-center gap-4 z-10">
+            <div className="w-12 h-12 rounded-2xl bg-[#00A86B] text-white flex items-center justify-center shrink-0 shadow-md">
+              <Globe className="w-6 h-6" />
+            </div>
+            <div>
+              <div className="text-xs font-semibold text-[#66CDAA]">
+                Experiência Aérea · Google Maps 3D
+              </div>
+              <h3 className="text-lg sm:text-xl font-extrabold text-white tracking-tight mt-0.5">
+                Tour 3D Interativo de Mairiporã
+              </h3>
+              <p className="text-xs sm:text-sm text-white/80 mt-1 max-w-2xl">
+                Sobrevoe em 3D os pontos turísticos mais icônicos da Serra da Cantareira, trace rotas e explore mirantes, represas e patrimônio histórico.
+              </p>
+            </div>
+          </div>
+
+          <span className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#FFD700] text-[#12221A] font-bold text-xs sm:text-sm shadow-md group-hover:bg-white transition-colors whitespace-nowrap shrink-0 z-10">
+            <span>Iniciar Tour 3D</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </span>
         </div>
 
       </div>

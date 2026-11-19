@@ -51,7 +51,7 @@ export const RegisterBusinessPromptPopup: React.FC<RegisterBusinessPromptPopupPr
       {/* 1. EXPANDED FLOATING POPUP CARD (IN RADIANT YELLOW) */}
       {isOpen && (
         <div 
-          className="fixed bottom-4 left-3 right-3 sm:right-auto sm:left-6 sm:bottom-6 z-45 max-w-sm sm:max-w-md w-auto animate-in slide-in-from-bottom-5 fade-in duration-300"
+          className="fixed bottom-4 right-3 sm:right-6 sm:bottom-6 z-45 max-w-sm sm:max-w-md w-auto animate-in slide-in-from-right-5 fade-in duration-300"
           role="dialog"
           aria-label="Cadastre seu negócio aqui"
         >

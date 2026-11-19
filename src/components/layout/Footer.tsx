@@ -76,10 +76,26 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenRegisterModal 
             <ul className="space-y-2 text-xs text-[#E9F6EC]">
               <li>
                 <button 
+                  onClick={() => onNavigate('welcome')} 
+                  className="hover:text-white hover:underline transition-colors cursor-pointer text-[#FFD700] font-bold"
+                >
+                  Boas-vindas & Login
+                </button>
+              </li>
+              <li>
+                <button 
                   onClick={() => onNavigate('home')} 
                   className="hover:text-white hover:underline transition-colors cursor-pointer"
                 >
                   Início
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => onNavigate('tour-3d')} 
+                  className="hover:text-white hover:underline transition-colors cursor-pointer"
+                >
+                  Tour 3D Mairiporã
                 </button>
               </li>
               <li>
